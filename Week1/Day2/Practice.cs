@@ -73,3 +73,23 @@ namespace Quiz002
 
 
 -----------------------------------------------------------
+namespace ifApp01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("정수를 입력하세요: ");
+            int value = Int32.Parse(Console.ReadLine());
+            if (value % 2 == 0)
+            {
+                Console.WriteLine("짝수");
+            }
+            else
+            {
+                Console.WriteLine("홀수");
+            }
+        }
+    }
+}
+
