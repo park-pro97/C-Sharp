@@ -44,7 +44,8 @@ namespace CToF
             Console.Write("섭씨 온도를 입력하세요: ");
             int C = Int32.Parse(Console.ReadLine());
 
-            double F = 9.0 / 5.0 * C + 32;
+            double F = 0.0;
+            F= (double)9 / 5 * C + 32;
             Console.WriteLine($"화씨 온도는 {F} 입니다.");
         }
     }
