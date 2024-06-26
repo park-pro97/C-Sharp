@@ -95,7 +95,7 @@ namespace ifApp01
 
 
 -----------------------------------------------------------
-namespace FirstFor
+namespace FirstFor //for문으로 1~100 더하기
 {
     internal class Program
     {
@@ -114,3 +114,20 @@ namespace FirstFor
 
 
 -----------------------------------------------------------
+namespace WhileApp //while문으로 1~100 더하기
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 0;
+            int sum = 0;
+            while(i <= 100)
+            {
+                sum += i;
+                i++;
+            }
+            Console.Write(sum);
+        }
+    }
+}
