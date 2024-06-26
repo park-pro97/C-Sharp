@@ -93,3 +93,24 @@ namespace ifApp01
     }
 }
 
+
+-----------------------------------------------------------
+namespace FirstFor
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // 1. 초기화조건 2. 종료조건//
+            int sum = 0; // sum이 0
+            for (int i = 1; i <=100; i++) // 1씩 늘어남
+            {
+                sum += i;
+            }
+            Console.WriteLine(sum); // 출력문을 안에 넣으면 과정이 보임 (내용 보고 싶으면)
+        }
+    }
+}
+
+
+-----------------------------------------------------------
