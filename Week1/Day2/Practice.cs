@@ -140,3 +140,67 @@ namespace ConsoleApp6
 }
 
 
+-----------------------------------------------------------
+//for문으로 1~100 숫자 홀수, 짝수끼리 더하기
+    namespace Quiz03
+{
+    internal class Program
+
+    {
+
+        static void Main(string[] args)
+
+        {
+
+            int sum1 = 0;
+            int sum2 = 0;
+
+            for (int j = 0; j <= 100; j++)
+            {
+                if (j % 2 == 1)
+                {
+                    sum1 += j;  //홀수
+                }
+                else
+                {
+                    sum2 += j;  //짝수
+                }
+            }
+            Console.WriteLine($"홀수: {sum1}, 짝수: {sum2}");
+        }
+    }
+}
+
+
+-----------------------------------------------------------
+//while문으로 1~100 숫자 홀수, 짝수끼리 더하기
+    namespace Quiz03
+{
+    internal class Program
+
+    {
+
+        static void Main(string[] args)
+
+        {
+            int sum1;
+            int sum2;
+            int i = 0;
+            sum1 = 0;
+            sum2 = 0;
+
+            while (i <= 100)
+            {
+                if (i % 2 == 1)
+                {
+                    sum1 += i++;  //홀수
+                }
+                else
+                {
+                    sum2 += i++;  //짝수
+                }
+            }
+            Console.WriteLine($"홀수: {sum1}, 짝수: {sum2}");
+        }
+    }
+}
