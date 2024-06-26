@@ -53,4 +53,23 @@ namespace CToF
 
 
 -----------------------------------------------------------
+namespace Quiz002
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("반지름을 입력하세요: ");
+            double R;
+            double A;
+            R = Int32.Parse(Console.ReadLine());
 
+            A = Math.PI * R * R;
+            Console.WriteLine($"원의 넓이는 {A:F2} 입니다.");
+            
+        }
+    }
+}
+
+
+-----------------------------------------------------------
