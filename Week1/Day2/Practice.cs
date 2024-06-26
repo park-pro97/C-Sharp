@@ -1,4 +1,5 @@
-﻿namespace ConsoleApp6
+//내 이름 알려주고 내 이름 출력시키기
+namespace ConsoleApp6
 {
     internal class Program // 메인 클래스
     {
@@ -15,7 +16,8 @@
 
 
 -------------------------------------------------------------------------
-﻿namespace ConsoleApp7
+//두 정수를 입력받아 둘을 더한 값을 출력시키기
+    namespace ConsoleApp7
 {
     internal class Program
     {
@@ -35,7 +37,8 @@
 }
 
 -----------------------------------------------------------
-namespace CToF
+//섭씨 온도를 입력해 화씨 온도로 변환한 값을 출력시키기
+    namespace CToF
 {
     internal class Program
     {
@@ -53,7 +56,8 @@ namespace CToF
 
 
 -----------------------------------------------------------
-namespace Quiz002
+//반지름을 입력하면 원의 넓이 구해서 출력시키기
+    namespace Quiz002
 {
     internal class Program
     {
@@ -73,7 +77,8 @@ namespace Quiz002
 
 
 -----------------------------------------------------------
-namespace ifApp01
+//정수를 입력하면 홀수인지 짝수인지 출력시키기
+    namespace ifApp01
 {
     internal class Program
     {
@@ -95,7 +100,8 @@ namespace ifApp01
 
 
 -----------------------------------------------------------
-namespace FirstFor //for문으로 1~100 더하기
+//for문으로 1~100 더하기
+    namespace FirstFor
 {
     internal class Program
     {
@@ -114,7 +120,8 @@ namespace FirstFor //for문으로 1~100 더하기
 
 
 -----------------------------------------------------------
-namespace WhileApp //while문으로 1~100 더하기
+//while문으로 1~100 더하기
+    namespace WhileApp
 {
     internal class Program
     {
@@ -131,3 +138,5 @@ namespace WhileApp //while문으로 1~100 더하기
         }
     }
 }
+
+
