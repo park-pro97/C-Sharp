@@ -74,3 +74,28 @@ namespace Array02
         }
     }
 }
+
+--------------------------------------------------------------
+//입력받은 문자를 역순으로 출력
+using System.Globalization;
+
+namespace Array02
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string str = Console.ReadLine();
+            string outText = "";
+            for(int i= str.Length - 1; i >=0; i--)
+            {
+                outText += str[i];
+            }
+            Console.WriteLine(outText);
+
+
+        }
+
+
+    }
+}
