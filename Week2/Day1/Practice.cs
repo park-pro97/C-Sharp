@@ -242,3 +242,49 @@ namespace OOP01
         }
     }
 }
+
+--------------------------------------------------------------
+namespace SwapByValue
+{
+    internal class Program
+    {
+        static void Swap(int a, int b)        //복사해서 새로 할당한거 ㅇㅇ
+        {
+            int temp = b;
+            b = a; 
+            a = temp;
+            Console.WriteLine($"{a} {b}");
+        }                                      //기존에는 여기서 리턴도 없고 하니 없던일로 되어서(pop)
+        static void Main(string[] args)
+        {
+            int x = 3, y = 4;
+            Console.WriteLine($"{x} {y}");
+            Swap(x, y);
+            Console.WriteLine($"{x} {y}");     //여기에는 메인에서 선언한 대로 3, 4로 나오는데,
+        }
+    }
+}
+
+↓ 바꾸면
+--------------------------------------------------------------
+namespace SwapByValue
+{
+    internal class Program
+    {
+        static void Swap(ref int a, ref int b)
+        {
+            int temp = b;
+            b = a; 
+            a = temp;
+            Console.WriteLine($"{a} {b}");
+        }                                   //ref사용함 ref는 새로운 변수가 아니라 포인터 주소임
+        static void Main(string[] args)
+        {
+            int x = 3, y = 4;
+            Console.WriteLine($"{x} {y}");
+            Swap(ref x, ref y);             
+            Console.WriteLine($"{x} {y}");  // Swap()에서 바꾼대로 4, 3으로 나옴
+        }
+    }
+}
+
