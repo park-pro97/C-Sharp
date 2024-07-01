@@ -244,23 +244,34 @@ namespace OOP01
 }
 
 --------------------------------------------------------------
+//foreach 
+    static int TotalScoer(int[] arr)
+{
+int totalScore = 0;
+foreach (int i in arr)
+{
+totalScore += i;
+}
+return totalScore;
+}
+--------------------------------------------------------------
 namespace SwapByValue
 {
     internal class Program
     {
-        static void Swap(int a, int b)        //복사해서 새로 할당한거 ㅇㅇ
+        static void Swap(int a, int b)        //복사해서 새로 할당
         {
             int temp = b;
             b = a; 
             a = temp;
             Console.WriteLine($"{a} {b}");
-        }                                      //기존에는 여기서 리턴도 없고 하니 없던일로 되어서(pop)
+        }                                      //여기 리턴도 없으니 없던 셈쳐버림
         static void Main(string[] args)
         {
             int x = 3, y = 4;
             Console.WriteLine($"{x} {y}");
             Swap(x, y);
-            Console.WriteLine($"{x} {y}");     //여기에는 메인에서 선언한 대로 3, 4로 나오는데,
+            Console.WriteLine($"{x} {y}");     //메인에서 선언한 대로 3, 4로 나오는데,
         }
     }
 }
