@@ -79,5 +79,31 @@ namespace Exam02
 }
 
 
+----------------------------------------------------------------------------
+//1~100 더하는 것을 메소드로 만들고 메인 메소드에선 풀력만 하게
+namespace Quiz03
+{
+    //1~100까지의 합은 5050. 이를 메소드로 만들어서, Main에서는 결과만 출력.
+    //5050결과는 NumberAdd 메소드를 만들어서 동작시켜라.
+
+    internal class Program
+    {
+        static int NumberAdd()
+        {
+            int sum = 0;
+            for(int i = 0; i<=100; i++)
+            {
+                sum += i;
+            }
+
+            return sum;
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine(NumberAdd()); 
+        }
+    }
+}
 
 ----------------------------------------------------------------------------
+//
