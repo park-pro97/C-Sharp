@@ -174,3 +174,49 @@ namespace ScoreApp02
 
 --------------------------------------------------------------
 // 국영수 3과목 성적 입력 받아서 총점, 평균 출력하는 프로그램 --- 함수 3개 사용
+using System.Xml.Serialization;
+
+namespace ScoreApp02
+{
+    internal class Program
+    {
+        static int[] InputThreeScore()
+        {
+            int[] score = new int[3];
+            Console.WriteLine("점수를 입력하세요: ");
+            for(int i = 0; i < score.Length; i++)
+            {
+                score[i] = Int32.Parse(Console.ReadLine());
+            }
+            return score;
+        }
+        
+        static int GetTotalScore(int[] arr)
+        {
+            int totalScore= 0;
+            foreach(int i in arr)
+            {
+                totalScore += i;
+            }
+            return totalScore;
+        }
+        static double GetAvg(int totalScore)
+        {
+            return totalScore / 3.0;
+        }
+
+        static void Main(string[] args)
+        {
+            
+            int[] scores = InputThreeScore();  //세 과목 점수 입력 받음
+            int totalScore = GetTotalScore(scores); //꺼내오는 함수
+            double avg = GetAvg(totalScore);
+
+            Console.WriteLine($"총점: {GetTotalScore}");
+            Console.WriteLine($"평균: {GetAvg:F2}");
+        }
+    }
+}
+
+--------------------------------------------------------------
+//
