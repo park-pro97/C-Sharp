@@ -150,3 +150,27 @@ namespace Exam03
 
 ----------------------------------------------------------------------------
 //
+namespace ScoreApp02
+{
+    internal class Program
+    {
+
+        static int TotalScore(int a, int b, int c)
+        {
+            return a + b + c;
+        }
+        static int AvgScore(int a, int b, int c)
+        {
+            return a + b + c;
+        }
+        static void Main(string[] args)
+        {
+            int totalScore = TotalScore(50,50, 50);
+            Console.WriteLine(totalScore);
+            Console.WriteLine($"평균값: {totalScore / 3.0:F2}");
+        }
+    }
+}
+
+--------------------------------------------------------------
+// 국영수 3과목 성적 입력 받아서 총점, 평균 출력하는 프로그램 --- 함수 3개 사용
