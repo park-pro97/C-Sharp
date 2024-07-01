@@ -44,3 +44,40 @@ namespace Exam02
 }
 
 ----------------------------------------------------------------------------
+//4칙연산 메소드 만들어서 계산시키기--스태틱
+namespace Exam02
+{
+    internal class Program
+    {
+        static int Plus(int a, int b)
+        {
+            return a + b;
+        }
+        static int Minus(int a, int b)
+        {
+            return a - b;
+        }
+        static int Multipie(int a, int b)
+        {
+            return a * b;
+        }
+        static double divide(int a, int b)
+        {
+            return (double) a / b;  //castring 연산자 -- 형변환 연산자
+        }
+
+        static void Main(string[] args)
+        {
+            //4칙연산 + - * /를 메소드로
+            //Plus(,) Minus(,) Multiple(,) ___divide(,)
+            //메인 메소드 1 4칙연산 메소드 4
+            int result = Minus(100, 5);
+            Console.WriteLine(result);
+
+        }
+    }
+}
+
+
+
+----------------------------------------------------------------------------
