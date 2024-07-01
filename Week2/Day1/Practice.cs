@@ -23,3 +23,24 @@ namespace VariableChange
 
 
 ----------------------------------------------------------------------------
+// 77~700까지 1씩 증가
+namespace Exam02
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //while문으로 77~700까지
+            int i = 77;
+
+            while(i <= 700)
+            {
+                Console.Write($"{i} ");
+                i++;
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+----------------------------------------------------------------------------
