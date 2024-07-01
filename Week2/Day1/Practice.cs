@@ -219,4 +219,26 @@ namespace ScoreApp02
 }
 
 --------------------------------------------------------------
-//
+//교재내용 실습
+namespace OOP01
+{
+    class Mathmatics
+    {
+        //멤버변수
+        //생성자
+        //멤버 메소드
+        public int f(int x)
+        {
+            return x * x;
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Mathmatics m = new Mathmatics(); //new할 때 생성됨
+            int result = m.f(9);
+            Console.Write(result);
+        }
+    }
+}
