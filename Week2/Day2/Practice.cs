@@ -163,4 +163,76 @@ namespace DoWhile
 }
 
 -------------------------------------------------------------------
-//
+//3개의 문제에 번호를 달아 입력받으면 정답을 출력  ---- 메소드 하나씩 따로 만들면 메인이 더 간편해짐
+namespace Quiz09
+{
+    internal class Program
+    {
+
+        
+        static void Main(string[] args)
+        {
+            int choice = 1;
+            do
+            {
+                Console.WriteLine("문제를 선택하세요.");
+                Console.WriteLine();
+                Console.WriteLine("1. 1 ~ 100까지의 홀수만 출력");
+                Console.WriteLine("2. A ~ Z, a ~ z 출력");
+                Console.WriteLine("3. 12와 18의 최대공약수 출력");
+                Console.WriteLine("4. 프로그램 종료");
+                Console.WriteLine();
+                Console.Write("문제 선택: ");
+
+                choice = Int32.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("1번: 1 ~ 100까지의 홀수만 출력");
+                        Console.WriteLine();
+                        for(int i = 1; i <= 100; i = i += 2)
+                        {
+                            Console.Write($"{i} " );
+                        }
+                        
+                        break;
+                    case 2:
+                        Console.WriteLine("2번: A ~ Z, a ~ z 출력");
+                        for(char c = 'A'; c <= 'Z'; c++)
+                        {
+                            Console.Write($"{c} ");
+                        }
+                        Console.WriteLine();
+                        for (char d = 'a'; d <= 'z'; d++)
+                        {
+                            Console.Write($"{d} ");
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("3번: 12와 18의 최대공약수 출력");
+                        int num1 = 12;
+                        int num2 = 18;
+                        int a = num1;
+                        int b = num2;
+                        while(b!= 0)
+                        {
+                            int temp = b;
+                            b = a % b;
+                            a = temp;
+                        }
+                        int gcd = a;
+                        Console.WriteLine();
+                        Console.WriteLine($"답: {a}");
+                        break;
+                    case 4:
+                        Console.WriteLine("프로그램 종료");
+                        break;
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+            while (choice != 4);
+        }
+    }
+}
