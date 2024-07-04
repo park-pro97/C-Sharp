@@ -267,17 +267,22 @@ namespace PrimeApp
     {
         static void Main(string[] args)
         {
-            for (int i = 2; i <= 100; i++)
+            for(int i = 2; i < 100; i++)
             {
-                for (int j = 2; j <= i; j++)
+                int count = 0;
+                for(int j = 2; j < i; j++)
                 {
-                    if (j == i)
-                        Console.Write($" {j}");
-                    else if (i % j == 0)
+                    if (i % j == 0)
+                    {
+                        count++;
                         break;
+                    }
+                }
+                if(count == 0)
+                {
+                    Console.WriteLine($"{i}");
                 }
             }
         }
     }
 }
-
