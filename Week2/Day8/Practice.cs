@@ -232,4 +232,52 @@ namespace OOPA07
 
 
 ----------------------------------------------------------------------------------------------------------------------------
-//
+//완전수 찾기
+    namespace ConsoleApp9
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("정수를 입력하세요: ");
+            int n = Int32.Parse(Console.ReadLine());
+            int result = 0;
+            for (int i = 1; i < n; i++)
+            {
+                if (n % i == 0)
+                    result += i;
+            }
+            if (result == n)
+            {
+                Console.WriteLine("Yes");
+            }
+            else
+            {
+                Console.WriteLine("No");
+            }
+        }
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------
+// 소수찾기
+namespace PrimeApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 2; i <= 100; i++)
+            {
+                for (int j = 2; j <= i; j++)
+                {
+                    if (j == i)
+                        Console.Write($" {j}");
+                    else if (i % j == 0)
+                        break;
+                }
+            }
+        }
+    }
+}
+
