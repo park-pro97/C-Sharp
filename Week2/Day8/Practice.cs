@@ -61,3 +61,175 @@ namespace OOPApp07
 
 ----------------------------------------------------------------------------------------------------------------------------
 //Quiz 상속, 다향성
+using System.Globalization;
+
+namespace OOPApp07
+{
+    class Car
+    {
+        public string name;
+        public int speed; //멤버변수
+        public Car() //디폴트 생성자
+        {
+            name = "차";
+            speed = 0;
+        }
+        public Car(string name, int speed)
+        {
+            this.name = name;
+            this.speed = speed;
+        }
+        public virtual void ShowType()
+        {
+            Console.WriteLine($"차 종류는: {name}, 속도는: {speed}입니다.");
+        }
+    }
+    class Bus : Car
+    {
+        public Bus()
+        {
+            name = "버스";
+            speed = 60;
+        }
+        public Bus(string name)
+        {
+            this.name= name;
+            speed = 60;
+        }
+        public Bus(string name, int speed)
+        {
+            this.name =name;
+            this.speed = speed;
+        }
+        public override void ShowType()
+        {
+            Console.WriteLine($"차 종류는: {name}, 속도는: {speed}입니다.");
+        }
+
+    }
+    class Taxi : Car
+    {
+        public Taxi()
+        {
+            name = "택시";
+            speed = 70;
+        }
+        public Taxi(string name)
+        {
+            this.name = name;
+            speed = 70;
+        }
+        public Taxi(string name, int speed)
+        {
+            this.name = name;
+            this.speed = speed;
+        }
+        public override void ShowType()
+        {
+            Console.WriteLine($"차 종류는: {name}, 속도는: {speed}입니다.");
+        }
+
+    }
+    class Truck : Car
+    {
+        public Truck()
+        {
+            name = "트럭";
+            speed = 40;
+        }
+        public Truck(string name)
+        {
+            this.name = name;
+            speed = 40;
+        }
+        public Truck(string name, int speed)
+        {
+            this.name = name;
+            this.speed = speed;
+        }
+        public override void ShowType()
+        {
+            Console.WriteLine($"차 종류는: {name}, 속도는: {speed}입니다.");
+        }
+    }
+       
+    
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Car bus = new Car();
+            Car Taxi = new Car();
+            Car Truck = new Car();
+            bus.ShowType();
+            Taxi.ShowType();
+            Truck.ShowType();
+
+            Car bus1 = new Bus("녹색");
+            Car taxi1 = new Taxi("회색");
+            Car truck1 = new Truck("검정색");
+            bus1.ShowType();
+            taxi1.ShowType();
+            truck1.ShowType();
+
+            Car bus2 = new Bus("녹색", 60);
+            Car taxi2 = new Taxi("회색", 70);
+            Car truck2 = new Truck("검정색", 40);
+            bus2.ShowType();
+            taxi2.ShowType();
+            truck2.ShowType();
+
+        }
+    }
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------
+//인터페이스 구현해보기(다중 상속)
+namespace OOPA07
+{
+    class Horse
+    {
+        public void Run()
+        {
+            Console.WriteLine("말이 달리고 있다.");
+        }
+    }
+    class Angel { }
+    interface IWing 
+    {
+        public void Fly(); // Abtract Method
+    }
+    interface IWing2
+    {
+        public void Fly();
+    }
+    class Unicon : Horse, IWing
+    {
+        //밑은 인터페이스 메소드의 구현
+        public void Fly()
+        {
+            Console.WriteLine("유니콘이 날고 있다.");
+        }
+        //여기는 유니콘의 멤버 메소드
+        public void PerformMagic()
+        {
+            Console.WriteLine("마법을 사용한다.");
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Unicon jack = new Unicon();
+            jack.Run();
+            jack.Fly();
+            jack.PerformMagic();
+        }
+    }
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------
+//
