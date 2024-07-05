@@ -403,4 +403,40 @@ namespace TestApp03
 }
 
 ---------------------------------------------------------------------------------------------------------------
-//
+//키보드로 입력을 받으면 알파벳 대.소문자 숫자 특수문자의 개수를 출력
+using System.ComponentModel.Design;
+using System.Diagnostics.Tracing;
+
+namespace TestApp05
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //1. 문자열을 입력.
+           string words = Console.ReadLine();
+            //2. 변수 카운트변수 4개
+            int BigCnt = 0, SmallCnt = 0, numberCnt = 0, specialCnt = 0;
+
+            //3. 카운팅 로직
+            for(int i = 0; i < words.Length; i++)
+            {
+                if (words[i] >= 'A' && words[i] <= 'Z')
+                BigCnt++;
+                else if (words[i] >= 'a' && words[i] <= 'z')
+                SmallCnt++;
+                else if (words[i] >= '0' && words[i] <= '9')
+                numberCnt++;
+                else specialCnt++;
+            }
+            Console.WriteLine($"대문자 : {BigCnt}");
+            Console.WriteLine($"소문자 : {SmallCnt}");
+            Console.WriteLine($"숫자 : {numberCnt}");
+            Console.WriteLine($"특수문자 : {specialCnt}");
+        }
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+//달팽이 출력(주말에 숙제) 북습하고 반드시 해볼 것.
