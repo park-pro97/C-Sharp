@@ -295,3 +295,112 @@ namespace BubbleSortApp02
         }
     }
 }
+
+---------------------------------------------------------------------------------------------------------------
+// 생성자, 소멸자
+namespace TestApp01
+{
+    class Person
+    {
+        public Person()
+        {
+            Console.WriteLine("디폴트 생성자 호출");
+        }
+        ~Person()
+        {
+            Console.WriteLine("소멸자 호출");
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Person person = new Person();
+        }
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+//get set 초기값 설정
+namespace TestApp02
+{
+    class User
+    {
+        private readonly string userID; //상수 처리
+        private readonly string userPW; //상수 처리
+
+        public User(string userID, string userPW)
+        {
+            this.userID = userID;
+            this.userPW = userPW;
+        }
+        public void Print()
+        {
+            Console.WriteLine(this.userID);
+            Console.WriteLine(this.userPW);
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string uID = "abc";
+            string uPW = "abc";
+
+            User user = new User(uID, uPW);
+            user.Print();
+
+        }
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+// 배열 안에 숫자 넣고 메소드로 연산
+namespace TestApp03
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr4 = new int[5] { 21, 98, 43, 27, 13 };
+            int[] arr5 = { 21, 98, 43, 27, 13 };
+
+            Console.WriteLine($"Max : {arr4.Max()}");
+            Console.WriteLine($"Max : {arr4.Min()}");
+            Console.WriteLine($"Max : {arr4.Sum()}");
+            Console.WriteLine($"Max : {arr4.Average()}");
+            Console.WriteLine($"Max : {arr4.Count()}");
+        }
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+//Array 메소드를 이용해 총점, 평균 구하기
+namespace TestApp03
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int[] score = new int[3];
+
+            for(int i = 0; i < 3; i++)
+            {
+                score[i] = random.Next(85, 101);
+            }
+
+            Console.WriteLine($"총점 : {score.Sum()}");
+            Console.WriteLine($"평균 : {score.Average():F2}");
+            Console.WriteLine($"Max : {score.Max()}");
+            Console.WriteLine($"Min : {score.Min()}");
+
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------
+//
