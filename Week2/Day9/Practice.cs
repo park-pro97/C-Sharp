@@ -222,7 +222,7 @@ namespace LottoApp03
             }
             Console.WriteLine();
             //보너스
-            Console.WriteLine($"보너스 번호: ");
+            Console.WriteLine($"보너스 번호: {bonus}");
         }
     }
 }
