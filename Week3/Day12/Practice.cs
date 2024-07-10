@@ -48,5 +48,32 @@ namespace ArrayTest02
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
-//배열 연습
+//배열 연습(클래스를 배열처럼 사용할 수 있게 만들어줌)
+using System.Runtime.CompilerServices;
+
+namespace IndexText
+{
+    class IdxDemo
+    {
+        private int[] num = new int[5];
+
+        public int this[int x]
+        {
+            set { num[x] = value; }
+            get { return num[x]; }
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            IdxDemo test = new IdxDemo();
+            for(int i = 0; i < 5; i++)
+            {
+                test[i] = i;
+                Console.WriteLine(test[i]);
+            }
+        }
+    }
+}
 
