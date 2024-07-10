@@ -80,4 +80,22 @@ namespace IndexText
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-    
+ \   namespace Code99
+{//배열처럼 만들자
+    enum Days { Sun=, Mon, Tue, Wen, Thu, Fri, Sat }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(Days.Sun);
+            Console.WriteLine(Days.Mon);
+            Console.WriteLine(Days.Tue);
+            Console.WriteLine(Days.Wen);
+            Console.WriteLine(Days.Thu);
+            Console.WriteLine(Days.Fri);
+            Console.WriteLine(Days.Sat);
+        }
+       
+    }
+}
+
