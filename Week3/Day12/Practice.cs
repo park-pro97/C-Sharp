@@ -20,5 +20,32 @@ namespace ArrayTest01
     }
 }
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+//배열 연습
+namespace ArrayTest02
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //변수선언
+            int[] numbers = new int[7];
+            for(int i = 0; i < numbers.Length; i++)
+            {
+                numbers[i] = 13 * (i + 1);
+                Console.WriteLine(numbers[i]);
+            }
+            string[] names = new string[3];
+            for(int j = 0; j < names.Length; j++)
+            {
+                names[j] = Console.ReadLine();
+                Console.WriteLine(names[j]);
+            }
+            
+        }
+    }
+}
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
+//배열 연습
