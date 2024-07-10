@@ -102,10 +102,36 @@ namespace IndexText
 
 ---------------------------------------------------------------------------------------------------------------------------------
 //UI만들기1
+namespace WinFormsApp6
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            txtResult.Text = txtName.Text + "님 당신의 학번은" + txtId.Text + "입니다.";
+            MessageBox.Show(txtName.Text + "님 당신의 학번은" + txtId.Text + "입니다."
+                            ,"알림" , MessageBoxButtons.OKCancel);
+        }
+
+        private void btnDispose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
 
 ---------------------------------------------------------------------------------------------------------------------------------
 //UI 만들기2
-
 namespace WinFormsApp7
 {
     public partial class Form1 : Form
@@ -157,3 +183,6 @@ namespace WinFormsApp7
         }
     }
 }
+
+---------------------------------------------------------------------------------------------------------------------------------
+//UI 만들기3
