@@ -80,6 +80,99 @@ namespace OOPTest05
 
 -----------------------------------------------------------------------------------------------------------------------
 //
+using System.Security.AccessControl;
 
+namespace OOPTest05
+{
+    class Car       //명사, 대문자로 시작!
+    {
+        //1.멤버 변수
+        private string brand;
+        private int speed;
+
+        //Property
+        public string Brand { get; set; }
+        public int Speed { get; set; }
+
+        //2.생성자 , 1개 이상
+        public Car() //default 생성자
+        {
+        }
+        public Car(string brand)
+        {
+            Brand = brand;
+        }
+        public Car(string brand, int speed)
+        {
+            Brand = brand;
+            speed = speed;
+        }
+        //3.멤버메소드
+        public void Run()
+        {
+            Console.WriteLine($"차가 달립니다.");
+        }
+        public void Run(string fast)
+        {
+            Console.WriteLine($"{fast}으로 달립니다.");
+        }
+
+        //Getter, Setter
+        //public string GetBrand()
+        //{
+        //    return Brand;
+        //}
+        //public void SetBrand(string brand)
+        //{
+        //    this.brand = brand;
+        //}
+        //public int GetSpeed()
+        //{
+        //    return speed;
+        //}
+        //public void SetSpeed(int speed)
+        //{
+        //    this.speed = speed;
+        //}
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Car BMW = new Car();
+            //BMW.Run();
+            //BMW.Run("빠르게 ");
+            ////Console.WriteLine(tom.GetName());
+            //Console.WriteLine(BMW.Brand);
+
+            Car BENZ = new Car("BENZ");
+            ////Console.WriteLine(sam.GetName());
+            ////Console.WriteLine(sam.GetAge());
+            //Console.WriteLine(BENZ.Brand);
+            //Console.WriteLine(BENZ.Speed);
+
+            Car AUDI = new Car("ADUI", 120);
+            ////Console.WriteLine(tony.GetName());
+            ////Console.WriteLine(tony.GetAge());
+            //Console.WriteLine(AUDI.Brand);
+            //Console.WriteLine(AUDI.Speed);
+
+            
+            BMW.Run();
+            BMW.Run("110");
+
+
+            BENZ.Run();
+            BENZ.Run("130");
+            AUDI.Run();
+            AUDI.Run("120");
+
+
+
+
+        }
+    }
+}
 
 -----------------------------------------------------------------------------------------------------------------------
