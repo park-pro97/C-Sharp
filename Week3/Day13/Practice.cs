@@ -270,3 +270,47 @@ namespace InterfaceTest01
         }
     }
 }
+
+-----------------------------------------------------------------------------------------------------------------------
+namespace InterfaceTest02
+{
+    interface IMaker
+    {
+        void MadeWhere();
+    }
+    interface IOwner
+    {
+        void WhoOwns();
+    }
+    class Korea : IMaker, IOwner
+    {
+        public void MadeWhere()
+        {
+
+        }
+        public void WhoOwns()
+        {
+            Console.WriteLine("대한민국 제품입니다.");
+        }
+        internal class Program
+        {
+            static void Main(string[] args)
+            {
+                IMaker km = new Korea();
+                km.MadeWhere();
+                // km.WhoOwns(); 안보임
+                IOwner ko = new Korea();
+                //ko.MadeWhere(); 안보임
+                ko.WhoOwns();
+
+                object obj = new Korea();
+                //obj.MadeWhere(); --- Access 불가
+                //obj.WhoOwns(); --- Access 불가
+
+                Korea korea = new Korea();
+                korea.MadeWhere();
+                korea.WhoOwns();
+            }
+        }
+    }
+}
