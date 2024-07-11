@@ -451,3 +451,46 @@ namespace DelegateApp03
         }
     }
 }
+
+
+-----------------------------------------------------------------------------------------------------------------------
+//UI만들기
+namespace WinFormsApp9
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            listBox1.Items.Add("장갑");
+            listBox1.Items.Add("타월");
+            listBox1.Items.Add("양말");
+            listBox1.Items.Add("바지");
+            listBox1.Items.Add("반팔티");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add(textBox1.Text); //값을 추가하고 남아있음 
+            textBox1.Text = ""; // 추가되면 공백을 추가해 비워줌
+            textBox1.Focus(); //
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Add(listBox1.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Remove(listBox2.Text);
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
