@@ -494,3 +494,23 @@ namespace WinFormsApp9
 
 
 -----------------------------------------------------------------------------------------------------------------------
+//UI만들기
+namespace WinFormsApp11
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = textBox1.Text.Substring(0, 3);
+            textBox3.Text = textBox1.Text.Substring(textBox1.TextLength - 3, 3);
+            textBox4.Text = textBox1.Text.Substring(5, 3);
+            textBox5.Text = textBox1.TextLength.ToString();
+        }
+    }
+}
+
