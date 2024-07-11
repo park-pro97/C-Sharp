@@ -537,3 +537,30 @@ namespace WinFormsApp12
 
 -----------------------------------------------------------------------------------------------------------------------
 //UI만들기
+namespace WinFormsApp13
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i, N; //N 값을 입력받을 변수와 i 변수 선언
+            double dsum = 0;
+
+            int n = int.Parse(textBox1.Text); //텍스트 박스 1의 입력된 숫자를 N에 대입
+            textBox2.Text = "";
+
+            for(i = 1; i <= n; ++i)
+            {//1부터 n까지 1씩 증가하며
+                dsum = dsum + i;
+                textBox2.Text = textBox2.Text + i + " + ";
+            }
+            textBox2.Text = textBox2.Text + " = " + dsum;
+        }
+    }
+}
+
