@@ -217,3 +217,55 @@ internal class Program
     }
 }
 }
+
+
+namespace InterfaceTest01
+{
+    interface IMaker
+    {
+        void MadeWhere();
+        void WareHouse();
+    }
+    class Korea : IMaker
+    {
+        public void MadeWhere()
+        {
+            Console.WriteLine("국산입니다.");
+        }
+
+        public void WareHouse()
+        {
+            Console.WriteLine("상품 등록 완료.");
+        }
+    }
+    class China : IMaker
+    {
+        public void MadeWhere()
+        {
+            Console.WriteLine("중국산입니다.");
+        }
+
+        public void WareHouse()
+        {
+            Console.WriteLine("상품 등록 완료.");
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            IMaker m = new Korea(); //인터페이스타입인 IMaker도 엑세스 가능
+            m.MadeWhere();
+            m.WareHouse();
+
+            Console.WriteLine(); // m 하나 만든 걸로 중국 클래스에도 사용 가능
+                                 // 한국에 쓰고 나중에 쓴 중국에 m이 덮어짐
+                                 // 변수 하나만 만들어 출력하고 재사용
+
+            m = new China();
+            m.MadeWhere();
+            m.WareHouse();
+        }
+    }
+}
