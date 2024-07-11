@@ -321,3 +321,29 @@ namespace InterfaceTest02
 
 -----------------------------------------------------------------------------------------------------------------------
 //구조체
+namespace Code117
+{
+    struct School
+    {
+        public string schName;
+        public string stName;
+        public int stGrade;
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            School sc;
+            sc.schName = "능인고등학교";
+            sc.stName = "박상민";
+            
+
+            Console.WriteLine(sc.schName);
+            Console.WriteLine(sc.stName);
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+//
