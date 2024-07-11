@@ -1,4 +1,4 @@
-//
+//객체지향 연습
 namespace OOPTest05
 {
     class Person        //명사, 대문자로 시작!
