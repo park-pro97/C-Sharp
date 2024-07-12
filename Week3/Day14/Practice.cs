@@ -109,6 +109,54 @@ namespace Listprac
 
 ----------------------------------------------------------------------------------------------------------
 //
+using System.Globalization;
+
+namespace ListTestApp
+{
+    class Album
+    {
+        //private int no;
+        //private string title;
+        //private StringInfo artist;
+
+        public int No { get; set; }
+        public string Title { get; set; }
+        public string Artist { get; set; }
+    }
+    class NewJeansAlbum : Album
+    {
+
+    }   
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<NewJeansAlbum> albumList = new List<NewJeansAlbum>();
+            NewJeansAlbum album = new NewJeansAlbum();
+            album.No = 1;
+            album.Title = "슈퍼 내추럴";
+            album.Artist = "뉴진스";
+            albumList.Add(album);
+
+
+            album = new NewJeansAlbum();
+            album.No = 2;
+            album.Title = "하우 스윗";
+            album.Artist = "뉴진스";
+            albumList.Add(album);
+
+            
+
+            foreach(NewJeansAlbum na in albumList)
+            {
+                Console.WriteLine(na.No);
+                Console.WriteLine(na.Title);
+                Console.WriteLine(na.Artist);
+                Console.WriteLine();
+            }
+        }
+    }
+}
 
 
 ----------------------------------------------------------------------------------------------------------
