@@ -71,6 +71,40 @@ namespace ListTest01
   
 ----------------------------------------------------------------------------------------------------------
 //
+namespace Listprac
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+            Random random = new Random();
+            for (int i = 0; i < 7; i++)
+            {
+                list.Add(random.Next(1, 101));
+            }
+            list.Sort();
+            list.Reverse();
+            foreach (int i in list)
+            {
+                Console.WriteLine(i);
+            }
+            Console.WriteLine();
+            list.Insert(0, -7);
+            list.Insert(list.Count, -100);
+            foreach (int i in list)
+            {
+                Console.WriteLine(i);
+            }
+            Console.WriteLine();
+            list.Remove(-7);
+            foreach (int i in list)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}
 
 
 ----------------------------------------------------------------------------------------------------------
