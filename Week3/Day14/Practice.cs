@@ -1,4 +1,36 @@
-//
+//delegate 사용
+namespace OOPDelegateApp
+{
+    class Report()
+    {
+        public string Police()
+        {
+            return "경찰에 신고하다.";
+        }
+        public string Fire()
+        {
+            return "소방서에 신고하다.";
+        }
+        public string Tax()
+        {
+            return "국세청에 신고하다.";
+        }
+    }
+    internal class Program
+    {
+        delegate string Call();
+        static void Main(string[] args)
+        {
+            Report rep = new Report();
+            Call call = rep.Police;
+            Console.WriteLine(call());
+            call = rep.Fire;
+            Console.WriteLine(call());
+            call = rep.Tax;
+            Console.WriteLine(call());
+        }
+    }
+}
 
 
 ----------------------------------------------------------------------------------------------------------
