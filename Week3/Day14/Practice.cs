@@ -283,7 +283,105 @@ namespace MYddressBook
 
 
 ----------------------------------------------------------------------------------------------------------
-//
+//축구선수(위랑 같은 문제) 하는 중
+    namespace Football
+{
+    internal class Program
+    {
+        class Player
+        {
+            public int BackNumber { get; set; }
+            public string Position { get; set; }
+            public string Name { get; set; }
+            public string Club { get; set; }
+            public string Nation { get; set; }
+        }
+        static void Main(string[] args)
+        {
+            List<Player> list = new List<Player>();
+            int choice = 0;
+            do
+            {
+                Console.WriteLine("1. 선수 삽입");
+                Console.WriteLine("2. 선수 삭제");
+                Console.WriteLine("3. 선수 조회");
+                Console.WriteLine("4. 선수 수정");
+                Console.WriteLine("5. 프로그램 종료");
+                Console.Write("선택한 메뉴: ");
+                choice = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                switch(choice)
+                {
+                    case 1:
+                        InsertData(list);
+                        break;
+                    case 2:
+                        DeleteData(list);
+                        break;
+                    case 3:
+                        SearchData(list);
+                        break;
+                    case 4:UpdateData(list);
+                        break;
+                    case 5:
+                        Console.WriteLine("프로그램 종료.");
+                        break;
+                }
+            }while(choice != 5);
+            static void InsertData(List<Player> list)
+            {
+                Console.WriteLine("등번호를 입력하세요: ");
+                int Num = int.Parse(Console.ReadLine());
+                Console.WriteLine("포지션을 입력하세요: ");
+                string Position = Console.ReadLine();
+                Console.WriteLine("이름을 입력하세요: ");
+                string Name = Console.ReadLine();
+                Console.WriteLine("팀을 입력하세요: ");
+                string Club = Console.ReadLine();
+                Console.WriteLine("국적을 입력하세요: ");
+                string Nation = Console.ReadLine();
+
+                list.Add(new Player { BackNumber = Num, Position = Position, Name = Name, Club = Club, Nation = Nation });
+                Console.WriteLine("완료");
+                Console.WriteLine();
+            }
+            static void DeleteData(List<Player> list)
+            {
+                Console.WriteLine("삭제할 선수의 등번호를 입력하세요: ");
+                int BackNumber = int.Parse(Console.ReadLine());
+                Player playerDelete = list.Find(a => a.BackNumber == BackNumber);
+                if (playerDelete != null)
+                {
+                    list.Remove(playerDelete);
+                    Console.WriteLine("삭제되었습니다.");
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 번호입니다.");
+                }
+                Console.WriteLine();
+
+                static void SearchData(List<Player> list)
+                {
+                    foreach (Player player in list)
+                    {
+                        Console.WriteLine($"BackNumber               Position              Name              Club              Nation");
+                        Console.WriteLine($"{player.BackNumber}               {player.Position}              {player.Name}              {player.Club}              {player.Nation}");
+                    }
+                    Console.WriteLine() ;
+                }
+                static void UpdataData(List<Player> list)
+                {
+                    Console.WriteLine("수정할 선수의 등번호를 입력하세요: ");
+                    int num = int.Parse(Console.ReadLine());
+                    Player playerUpdate = 
+                }
+            }
+        }
+    }
+}
+
 
 
 ----------------------------------------------------------------------------------------------------------
