@@ -34,6 +34,18 @@ namespace OOPDelegateApp
 
 
 ----------------------------------------------------------------------------------------------------------
+//리스트 표현법
+ internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> intList = new List<int>();
+            intList.Add(10); intList.Add(20); intList.Add(30);
+            foreach (int i in intList) { Console.WriteLine(i); }
+        }
+    }
+
+----------------------------------------------------------------------------------------------------------
 //리스트 사용법
 namespace ListTest01
 {
