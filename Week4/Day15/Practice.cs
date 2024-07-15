@@ -91,9 +91,32 @@ namespace CUrrentType
 
 
 -------------------------------------------------------------------------------------------------------------------------------
-//
+//날짜시각 출력 (DateTime 사용)
 
+namespace DateTime01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
 
+            Console.WriteLine("년, 월, 일을 입력하세요. ");
+            Console.Write("년도: ");
+            int Year = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("월: ");
+            int Month = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("일: ");
+            int Day = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.WriteLine($"{Year} - {Month} - {Day}");
+
+            string t = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Console.WriteLine(t);
+        }
+    }
+}
 
 
 -------------------------------------------------------------------------------------------------------------------------------
