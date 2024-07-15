@@ -158,3 +158,47 @@ namespace WinFormsApp14
         }
     }
 }
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+//3으로 나눴을 때 나머지가 0,1,2 
+using System.Security.Cryptography;
+namespace WinFormsApp15
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        int v1;
+        int v2;
+        int v3;
+        int num;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            num = int.Parse(textBox1.Text);
+            for (int i = 1; i <= num; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    textBox2.AppendText($"{i} + ");
+                    v1 += i;
+                }
+                else if (i % 3 == 1)
+                {
+                    textBox3.AppendText($"{i} + ");
+                    v2 += i;
+                }
+                else if (i % 3 == 2)
+                {
+                    textBox4.AppendText($"{i} + ");
+                    v3 += i;
+                }
+            }
+            textBox2.AppendText($" = {v1}");
+            textBox3.AppendText($" = {v2}");
+            textBox4.AppendText($" = {v3}");
+        }
+    }
+}
