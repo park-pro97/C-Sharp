@@ -120,4 +120,41 @@ namespace DateTime01
 
 
 -------------------------------------------------------------------------------------------------------------------------------
-//
+//정수 받아서 홀수끼리 짝수끼리 합친 값 출력
+namespace WinFormsApp14
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i, num;
+            Double Odd = 0, Even = 0;
+
+            num = int.Parse(textBox1.Text);
+
+            textBox2.Text = "";
+            textBox3.Text = "";
+
+            for(i = 1; i <= num; i++)
+            {
+                if(i % 2 ==0)
+                {
+                    Even += i;
+                    textBox3.Text = textBox3.Text + i + "+";
+                }
+                else
+                {
+                    Odd += i;
+                    textBox2.Text = textBox2.Text + i + "+";
+                }
+            }
+            textBox2.Text = textBox2.Text + " = " + Odd;
+            textBox3.Text = textBox3.Text + " = " + Even;
+        }
+    }
+}
