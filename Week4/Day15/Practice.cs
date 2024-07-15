@@ -1,5 +1,4 @@
-
-
+//리스트 활용
 using System.Runtime.Serialization;
 
 namespace QuizObjectList
@@ -41,3 +40,61 @@ namespace QuizObjectList
         }
     }
 }
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+//UI - 현재 시간날짜 출력
+namespace CUrrentType
+{
+    public partial class Form1 : Form
+    {
+        private int number;
+        private DateTime nowTime;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        public void GetNumber()
+        {
+            number++;
+        }
+        public void OutNumber()
+        {
+            textBox1.AppendText(number + "\r\n");
+        }
+        public void GetTime()
+        {
+            nowTime = DateTime.Now;
+        }
+        public void OutTime()
+        {
+            textBox2.AppendText(nowTime + "\r\n");
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= 5; i++)
+            {
+                GetNumber();
+                OutNumber();
+                GetTime();
+                OutTime();
+                Thread.Sleep(1000);
+            }
+        }
+    }
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+//
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+//
