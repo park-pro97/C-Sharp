@@ -107,3 +107,69 @@ WHERE SAL >= 2500 AND JOB = 'ANALYST';
 
 
 -----------------------------------------------------------------------------------------
+//급여가 3000이 아닌 모든 데이터 추출
+SELECT * FROM EMP WHERE SAL != 3000;
+SELECT * FROM EMP WHERE SAL <> 3000;
+SELECT * FROM EMP WHERE SAL ^= 3000;
+SELECT * FROM EMP WHERE NOT SAL = 3000;
+
+// !!! @@가 아닌 값들을 전부 출력하려면 네 가지 표현이 존재하는데 보통 느낌표를 제일 많이 사용한다(1번째) !!!
+
+
+-----------------------------------------------------------------------------------------
+//IN과 BETWEEN
+-- IN 연산자
+SELECT * FROM EMP
+WHERE JOB = 'MANAGER' OR JOB = 'SALESMAN';
+
+SELECT * FROM EMP
+WHERE JOB IN ('MANAGER', 'SALESMAN');
+SELECT * FROM EMP
+WHERE JOB NOT IN ('MANAGER','SALESMAN');
+
+
+-----------------------------------------------------------------------------------------
+//BETWEEN 연산자
+-- BETWEEN 연산자
+SELECT * FROM EMP WHERE SAL >= 2000 AND SAL <= 3000;
+SELECT * FROM EMP WHERE SAL BETWEEN 2000 AND 3000;
+
+
+-----------------------------------------------------------------------------------------
+//오라클 접속(콘솔앱으로 모듈 nu get 받고난 후
+//도구 - Nuget 패키지 관리에서 패키지 관리자 콘솔 실행
+//Oracle.ManagedDataAccess.Core를 솔루션에 설치 (안정적인 23.5 버전) 사용하기 위하여 각 프로그램마다 설정해줘야함
+//연결 스크립트 불러오고
+//연결 객체 만들고( Client )
+//DB접속을 위한 연결
+// 리소스 반환 및 종료
+using Oracle.ManagedDataAccess.Client;
+
+namespace OracleQueryTest01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // 연결 스크립트
+            string strConn = "Data Source=(DESCRIPTION=" +
+                "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)" +
+                "(HOST=localhost)(PORT=1521)))" +  //나는 여기 포트 9000
+                "(CONNECT_DATA=(SERVER=DEDICATED)" +
+                "(SERVICE_NAME=xe)));" +
+                "User Id=SCOTT;Password=TIGER;";
+
+            // 1. 연결 객체 만들기 - 작성 시 위에 Nuget으로 받은 모델이 적용됨을 확인 가능
+            OracleConnection conn = new OracleConnection(strConn);
+
+            // 2. 데이터베이스 접속을 위한 연결 후 서버 가동 완료
+            conn.Open();
+
+            // 3. 리소스 반환 및 종료
+            conn.Close();
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------------------
