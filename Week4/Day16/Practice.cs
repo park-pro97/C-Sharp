@@ -64,7 +64,7 @@ INSERT INTO EMP_DDL VALUES (2, '홍길동', '대리');
 
 
 -----------------------------------------------------------------------------------------
-//테이블로 주소록 만들기
+//테이블로 주소록 만들기(C# 콘솔 앱으로 만들던 DB의 정보 기입을 쉽게 가능함)
 DROP TABLE STUDENT;
 CREATE TABLE STUDENT
 (
@@ -80,6 +80,30 @@ INSERT INTO STUDENT (ID, NAME, HP, LOCATION)
 VALUES (1, '홍길동', '010-1111-1111', '안동');
 INSERT INTO STUDENT (ID, NAME, HP, LOCATION)
 VALUES (2, '이순신', '010-2222-2222', '대구');
+
+
+-----------------------------------------------------------------------------------------
+//WHERE절과 연산자
+--EMP테이블에서 부서번호가 30인 데이터만 호출해 봅시다.
+SELECT * FROM EMP
+WHERE DEPTNO = 30;
+--직업이 매니저인 데이터만 호출
+SELECT * FROM EMP
+WHERE JOB = 'MANAGER';
+--직업이 매니저면서 부서번호가 30인 사원을 출력
+SELECT * FROM EMP
+WHERE DEPTNO = 30 AND JOB = 'MANAGER';
+--부서번호가 30번인 모든 사람과 JOB이 'CLERK'인 모든 사람을 출력
+SELECT * FROM EMP
+WHERE DEPTNO = 30 OR JOB = 'CLERK';
+--산술연산
+SELECT * FROM EMP
+WHERE SAL * 12 = 36000;
+--급여가 3000$ 이상인 직원을 모두 출력
+SELECT * FROM EMP WHERE SAL >= 3000;
+--급여가 2500 이상이고 직업이 'ANALYST'인 사람은?
+SELECT * FROM EMP
+WHERE SAL >= 2500 AND JOB = 'ANALYST';
 
 
 -----------------------------------------------------------------------------------------
