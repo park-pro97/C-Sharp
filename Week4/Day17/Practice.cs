@@ -203,42 +203,30 @@ FROM DUAL;
 
 ----------------------------------------------------------------------------------------------
 //6장 연습문제
-1번   LAPD, RPAD 함수 활용 출력
-SELECT 'Oracle',
-    LPAD('Oracle', 10, '#') AS LPAD_1,
-    RPAD('Oracle', 10, '*') AS RPAD_1,
-    LPAD('Oracle', 10) AS LPAD_2,
-    LPAD('Oracle', 10) AS RPAD_2 FROM DUAL;
+1번
+SELECT EMPNO,RPAD(SUBSTR(EMPNO,-LENGTH(EMPNO),2),4,'*')AS MASKING_EMPNO,
+ENAME,RPAD(SUBSTR(ENAME,-LENGTH(ENAME),1),5,'*')AS MASKING_ENAME
+FROM EMP WHERE LENGTH(ENAME) >= 5 AND LENGTH(ENAME) < 6;
  
-2번   RPAD 함수 활용 주민 뒷자리 *표시 출력
-RPAD('971225-', 14, '*') AS RPAD_JMMO,
-    RPAD('010-1234-', 13, '*') AS RPAD_PHONE FROM DUAL;
+2번
+SELECT EMPNO,ENAME,SAL,TRUNC((SAL/21.5),2)AS DAY_PAY,
+ROUND(((SAL/21.5)/8),1)AS TIME_PAY
+FROM EMP;
  
-3번   두 열 사이 콜론 넣고 연결
-SELECT CONCAT(EMPNO, ENAME),
-       CONCAT(EMPNO, CONCAT(' : ', ENAME)) FROM EMP;
+3번
+SELECT EMPNO,ENAME,TO_CHAR(HIREDATE,'YYYY/MM/DD')AS HIREDATE,
+TO_CHAR(NEXT_DAY(ADD_MONTHS(HIREDATE,3),'월요일'),'YYYY-MM-DD')AS R_JOB,
+NVL(TO_CHAR(COMM),'N/A')AS COMM
+FROM EMP;
  
-4번   TRIM 함수로 공백 제거하여 출력
-SELECT '[' || TRIM(' _ _ORACLE_ _ ') || ']' AS TRIM,
-       '[' || TRIM(LEADING FROM ' _ _ORACLE_ _ ') || ']' AS TRIM_LEADING,
-       '[' || TRIM(TRAILING FROM ' _ _ORACLE_ _ ') || ']' AS TRIM_TRAILING,
-       '[' || TRIM(BOTH FROM ' _ _ORACLE_ _ ') || ']' AS TRIM_BOTH
-FROM DUAL;
- 
-5번   TRIM 함수로 삭제할 문자 _ 삭제 후 출력하기
-SELECT '[' || TRIM('_' FROM '_ _ORACLE_ _') || ']' AS TRIM,
-       '[' || TRIM(LEADING '_' FROM '_ _ORACLE_ _') || ']' AS TRIM_LEADING,
-       '[' || TRIM(TRAILING '_' FROM '_ _ORACLE_ _') || ']' AS TRIM_TRAILING,
-       '[' || TRIM(BOTH '_' FROM '_ _ORACLE_ _') || ']' AS TRIM_BOTH
-FROM DUAL;
- 
-6번   TRIM, LTRIM, RTRIM 활용
-SELECT '[' || TRIM(' _ORACLE_ ') || ']' AS TRIM,
-       '[' || LTRIM(' _ORACLE_ ') || ']' AS LTRIM,
-       '[' || LTRIM('<_ORACLE_>', '_<') || ']' AS LTRIM_2,
-       '[' || RTRIM(' _ORACLE_ ') || ']' AS RTRIM,
-       '[' || RTRIM('<_ORACLE_>', '>_') || ']' AS RTRIM_2
-FROM DUAL;
+4번
+SELECT EMPNO,ENAME,MGR,
+CASE WHEN MGR IS NULL THEN 0000
+WHEN SUBSTR(MGR,-LENGTH(MGR),2)='75' THEN 5555
+WHEN SUBSTR(MGR,-LENGTH(MGR),2)='76' THEN 6666
+WHEN SUBSTR(MGR,-LENGTH(MGR),2)='77' THEN 7777
+WHEN SUBSTR(MGR,-LENGTH(MGR),2)='78' THEN 8888
+ELSE MGR END AS CHG_MGR FROM EMP;
 
 
 ----------------------------------------------------------------------------------------------
