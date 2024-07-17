@@ -280,25 +280,107 @@ SELECT SYSDATE,
 FROM DUAL;
 
 ----------------------------------------------------------------------------------------------
-//
-
-
-
-----------------------------------------------------------------------------------------------
-//
-
-
-----------------------------------------------------------------------------------------------
-//
+//HIREDATE와 SYSDATE 사이 개월수
+SELECT EMPNO, ENAME, HIREDATE, SYSDATE,
+    MONTHS_BETWEEN(HIREDATE, SYSDATE) AS MONTHS1,
+    MONTHS_BETWEEN(SYSDATE, HIREDATE) AS MONTHS2,
+    TRUNC(MONTHS_BETWEEN(SYSDATE, HIREDATE)) AS MONTHS3
+FROM EMP;
 
 
 ----------------------------------------------------------------------------------------------
-//
+//ROUND 함수 사용하여 날짜 데이터 출력
+SELECT SYSDATE,
+    ROUND(SYSDATE, 'CC') AS FORMAT_CC,
+    ROUND(SYSDATE, 'YYYY') AS FORMAT_YYYY,
+    ROUND(SYSDATE, 'Q') AS FORMAT_Q,
+    ROUND(SYSDATE, 'DDD') AS FORMAT_DDD,
+    ROUND(SYSDATE, 'HH') AS FORMAT_HH
+FROM DUAL;
 
 
 ----------------------------------------------------------------------------------------------
-//
+//TRUNC 함수 사용하여 날짜 데이터 출력
+SELECT SYSDATE,
+    TRUNC(SYSDATE, 'CC') AS FORMAT_CC,
+    TRUNC(SYSDATE, 'YYYY') AS FORMAT_YYYY,
+    TRUNC(SYSDATE, 'Q') AS FORMAT_Q,
+    TRUNC(SYSDATE, 'DDD') AS FORMAT_DDD,
+    TRUNC(SYSDATE, 'HH') AS FORMAT_HH
+FROM DUAL;
 
 
 ----------------------------------------------------------------------------------------------
-//
+//OPTION일 구하기 1
+SELECT
+    NEXT_DAY(NEXT_DAY('24/09/01', '목요일'),'목요일')
+FROM DUAL;
+
+-- OPTION일 구하기 2
+SELECT
+    NEXT_DAY(TRUNC(TO_DATE('24/09/01', 'YY/MM/DD'), 'MM') + 6, '목요일')
+FROM DUAL;
+
+
+----------------------------------------------------------------------------------------------
+//오라클의 자료형
+SELECT EMPNO, ENAME, EMPNO+'500'
+FROM EMP;
+
+SELECT 'ABCD' + EMPNO FROM EMP;
+
+
+----------------------------------------------------------------------------------------------
+//날짜를 문자로 변환 TO_CHAR
+SELECT SYSDATE, TO_CHAR(SYSDATE), TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS') 
+AS 현재시간 FROM DUAL;
+
+
+----------------------------------------------------------------------------------------------
+//ORACLE 포맷 날짜 표시 형식
+SELECT SYSDATE,
+    TO_CHAR(SYSDATE),
+    TO_CHAR(SYSDATE, 'YYYY/MM/DD HH24:MI:SS'),
+    TO_CHAR(SYSDATE, 'MM') AS "월",
+    TO_CHAR(SYSDATE, 'MON') AS "MON",
+    TO_CHAR(SYSDATE, 'MONTH') AS "MONTH",
+    TO_CHAR(SYSDATE, 'DD') AS "DD",
+    TO_CHAR(SYSDATE, 'DY') AS "DY",
+    TO_CHAR(SYSDATE, 'DAY') AS "DAY"
+FROM DUAL;
+
+----------------------------------------------------------------------------------------------
+//TO_CHAR을 활용한 통화형식 지정
+SELECT SAL,
+    TO_CHAR(SAL, '$999,999') AS "달러",
+    TO_CHAR(SAL, 'L999,999') AS "원화",
+    TO_CHAR(SAL, '$999,999.00') AS "원화+소수점",
+    TO_CHAR(SAL, '999,999.00') AS "SAL_1",
+    TO_CHAR(SAL, '000,999,999.00') AS "SAL_2"
+FROM EMP;
+
+
+----------------------------------------------------------------------------------------------
+//문자 데이터 처리
+SELECT 1300 - '1500' FROM DUAL;
+SELECT TO_NUMBER('1,300', '999,999') - TO_NUMBER('1,500', '999,999') FROM DUAL;
+
+
+----------------------------------------------------------------------------------------------
+//TO_DATE 함수
+SELECT TO_DATE('2018-07-04', 'YYYY-MM-DD') FROM DUAL;
+[TO_DATE('2018-07-04', 'RR-MM-DD') FROM DUAL;]  ---> 이렇게도 가능
+
+----------------------------------------------------------------------------------------------
+//NULL 처리 함수
+SELECT EMPNO, ENAME, SAL, COMM, SAL+COMM,
+       NVL(COMM, 0),
+       SAL + NVL(COMM, 0)
+FROM EMP;
+
+SELECT COMM, NVL(COMM, 500) FROM EMP;
+
+SELECT ENAME, COMM,
+    NVL2(COMM, 'O', 'X'),
+    NVL2(COMM, SAL*12+COMM, SAL*12) AS 연봉
+FROM EMP;
