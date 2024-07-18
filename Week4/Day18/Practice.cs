@@ -7,6 +7,7 @@ SELECT ENAME, SAL, NVL2(COMM, 'O', 'X') FROM EMP; -- OX 대신 한글로 가능
 
 
 ----------------------------------------------------------------------------------
+
 //실습6-47
 SELECT EMPNO, ENAME, JOB, SAL,
 DECODE(JOB, 'MANAGER', SAL*1.1,
@@ -17,6 +18,7 @@ DECODE(JOB, 'MANAGER', SAL*1.1,
 
 
 ----------------------------------------------------------------------------------
+        
 //CASE문을 사용
 SELECT EMPNO, ENAME, JOB, SAL,
     CASE JOB
