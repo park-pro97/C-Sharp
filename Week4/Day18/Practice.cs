@@ -310,4 +310,55 @@ ORDER BY DEPTNO;
 
 
 ----------------------------------------------------------------------------------
+//JOIN 테이블의 결합
+SELECT * FROM EMP, DEPT
+WHERE EMP.DEPTNO = DEPT.DEPTNO;
+
+
+----------------------------------------------------------------------------------
+//테이블 별칭(실습 8-3)   테이블 두 개를 합치는 것.
+SELECT * FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO
+ORDER BY EMPNO;
+
+
+----------------------------------------------------------------------------------
+//EMP와 DEPT 테이블에 존재하는 것들을
+//조인으로 최소한의 정보로 새 테이블을 만들어낼 수 있다.
+//최소 하나의 컬럼은 중복이 되어야 한다.
+SELECT * FROM EMP;
+SELECT * FROM DEPT;
+
+SELECT E.EMPNO, E.ENAME, D.DEPTNO, D.DNAME, D.LOC
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO;
+
+
+----------------------------------------------------------------------------------
+//실습 8-6
+SELECT E.EMPNO, E.ENAME, E.SAL, D.DEPTNO, D.DNAME, D.LOC
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO;
+
+
+----------------------------------------------------------------------------------
+//급여가 2500 이하이고 사원 번호가 7600 이하인 사원의 정보가 출력되는 코드
+SELECT E.EMPNO, E.ENAME, E.SAL, D.DEPTNO, D.DNAME, D.LOC
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO
+AND E.SAL <= 2500
+AND E.EMPNO <= 7600
+ORDER BY E.EMPNO;
+
+
+----------------------------------------------------------------------------------
 //
+SELECT * FROM MOVIES;
+SELECT * FROM ACTORS;
+SELECT * FROM MOVIE_ACTORS;
+
+SELECT M.TITLE, A.NAME
+FROM MOVIES M , ACTORS A, MOVIE_ACTORS MA
+WHERE M.MOVIE_ID = MA.MOVIE_ID
+AND a.ACTOR_ID = MA.ACTOR_ID
+AND M.TITLE = '기생충';
