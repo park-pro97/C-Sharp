@@ -218,3 +218,41 @@ GROUP BY TO_CHAR(HIREDATE, 'YYYY'), DEPTNO
 ORDER BY TO_CHAR(HIREDATE, 'YYYY'), DEPTNO;
 
 
+----------------------------------------------------------------------------------
+//영화 테이블 퀴즈1
+SELECT GENRE, COUNT(GENRE) FROM MOVIES
+GROUP BY GENRE
+ORDER BY COUNT(GENRE);
+
+
+----------------------------------------------------------------------------------
+//영화 테이블 퀴즈2
+SELECT TITLE, RUNTIME
+FROM MOVIES
+WHERE RUNTIME >= 130
+ORDER BY RUNTIME;
+
+                
+----------------------------------------------------------------------------------
+//영화 테이블 퀴즈3
+SELECT
+    SUM(CASE
+        WHEN RELEASE_DATE <= TO_DATE('2014-12-31', 'YYYY-MM-DD') THEN 1 ELSE 0
+    END) AS "2014 이전",
+    SUM(CASE
+        WHEN RELEASE_DATE > TO_DATE('2014-12-31', 'YYYY-MM-DD') THEN 1 ELSE 0
+    END) AS "2015 이후"
+FROM MOVIES;
+
+                
+----------------------------------------------------------------------------------
+//영화 테이블 퀴즈4
+SELECT AVG(RUNTIME) FROM MOVIES;
+
+                
+----------------------------------------------------------------------------------
+//영화 테이블 퀴즈5
+SELECT TITLE, RUNTIME
+FROM MOVIES
+WHERE RUNTIME = (SELECT MIN(RUNTIME) FROM MOVIES)
+   OR RUNTIME = (SELECT MAX(RUNTIME) FROM MOVIES);
