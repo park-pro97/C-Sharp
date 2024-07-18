@@ -16,7 +16,6 @@ DECODE(JOB, 'MANAGER', SAL*1.1,
         FROM EMP;
 
 
-
 ----------------------------------------------------------------------------------       
 //CASE문을 사용
 SELECT EMPNO, ENAME, JOB, SAL,
