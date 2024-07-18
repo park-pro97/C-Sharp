@@ -1,4 +1,5 @@
 //EMP 테이블 조회
+
 SELECT *FROM EMP;
 
 SELECT ENAME, SAL, NVL(COMM, 0) FROM EMP; --NULL 제거하고 뽑음
