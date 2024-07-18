@@ -260,23 +260,53 @@ WHERE RUNTIME = (SELECT MIN(RUNTIME) FROM MOVIES)
 
 
 ----------------------------------------------------------------------------------
-//
-
-
-
-----------------------------------------------------------------------------------
-//
-
-
-
-----------------------------------------------------------------------------------
-//
-
+//실습 7-24
+SELECT DEPTNO, JOB, COUNT(*), MAX(SAL), MIN(SAL), AVG(SAL)
+FROM EMP
+GROUP BY DEPTNO, JOB
+ORDER BY DEPTNO, JOB;
 
 
 ----------------------------------------------------------------------------------
-//
+//ROLLUP
+SELECT DEPTNO, JOB, COUNT(*), MAX(SAL), MIN(SAL), ROUND(AVG(SAL), 2)
+FROM EMP
+GROUP BY ROLLUP(DEPTNO, JOB);
 
+
+----------------------------------------------------------------------------------
+//CUBE
+SELECT DEPTNO, JOB, COUNT(*), MAX(SAL), MIN(SAL), ROUND(AVG(SAL), 2)
+FROM EMP
+GROUP BY CUBE(DEPTNO, JOB);
+
+
+----------------------------------------------------------------------------------
+//7-36 PIVOT
+SELECT DEPTNO, JOB, MAX(SAL)
+FROM EMP
+GROUP BY DEPTNO, JOB
+ORDER BY DEPTNO, JOB;
+
+--같은 건데 PIVOT으로 하면??
+                
+SELECT * FROM (SELECT DEPTNO, JOB, SAL FROM EMP)
+            PIVOT(MAX(SAL)
+                FOR DEPTNO IN (10, 20, 30))
+ORDER BY JOB;
+
+
+----------------------------------------------------------------------------------
+//7-37 부서별 직책별 최고 급여를 2차원 표 형태로 출력
+SELECT * FROM (SELECT JOB, DEPTNO, SAL FROM EMP)
+        PIVOT(MAX(SAL)
+            FOR JOB IN (
+            'CLERK',
+            'SALESMAN',
+            'PRESIDENT',
+            'MANAGER',
+            'ANALYST'))
+ORDER BY DEPTNO;
 
 
 ----------------------------------------------------------------------------------
