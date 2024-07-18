@@ -152,22 +152,29 @@ WHERE DEPTNO = 10;
 SELECT * FROM EMP WHERE DEPTNO = 20;
 
 
---MIN, MAX를 사용할 때 어떻게 사용해야 하는지 헷갈리지 말기
+----------------------------------------------------------------------------------
+//MIN, MAX를 사용할 때 어떻게 사용해야 하는지 헷갈리지 말기
 -- 부서 번호가 20인 직원 중 가장 최근에 입사한 사람의 날짜
 SELECT MAX(HIREDATE) FROM EMP
 WHERE DEPTNO = 20;
 
--- 부서 번호가 20인 직원 중 가장 오래 근무한 사람의 날짜
+                
+----------------------------------------------------------------------------------
+//부서 번호가 20인 직원 중 가장 오래 근무한 사람의 날짜
 SELECT MIN(HIREDATE) FROM EMP
 WHERE DEPTNO = 20;
 
---HAVING절 GROUP BY의 조건
+                
+----------------------------------------------------------------------------------
+//HAVING절 GROUP BY의 조건
 SELECT DEPTNO, JOB, ROUND(AVG(SAL),2) FROM EMP -- 단일행 사용 밑의 GROUP BY로 묶어줌
 GROUP BY DEPTNO, JOB
 HAVING ROUND(AVG(SAL),2) >= 2000
 ORDER BY DEPTNO, JOB; -- 부서 번호 기준으로 JOB을 정렬
 
---WHERE절이랑 HAVING절 같이 사용    //WHERE 조건이 먼저 나와야함.
+
+----------------------------------------------------------------------------------
+//WHERE절이랑 HAVING절 같이 사용    //WHERE 조건이 먼저 나와야함.
 SELECT DEPTNO, JOB, AVG(SAL) FROM EMP --단일행 집합을 사용해서 
 WHERE SAL <= 3000   -- 여기 에러남
 GROUP BY DEPTNO, JOB -- 그래서 GROUP BY로 묶어줌
@@ -181,19 +188,25 @@ SELECT * FROM BONUS;
 
 SELECT * FROM EMP;
 
---연습문제 1
+                
+----------------------------------------------------------------------------------
+//연습문제 1
 SELECT DEPTNO,
     ROUND(AVG(SAL),2), MAX(SAL), MIN(SAL), COUNT(SAL)
 FROM EMP
 GROUP BY DEPTNO
 ORDER BY DEPTNO ASC;
 
---연습문제 2
+                
+----------------------------------------------------------------------------------
+//연습문제 2
 SELECT JOB, COUNT(JOB) FROM EMP
 GROUP BY JOB
 HAVING COUNT(JOB) >= 3;
 
---연습문제 3
+                
+----------------------------------------------------------------------------------
+//연습문제 3
 SELECT SUBSTR(HIREDATE, 1, 2),  COUNT(*), DEPTNO
 FROM EMP
 GROUP BY SUBSTR(HIREDATE, 1, 2), DEPTNO
