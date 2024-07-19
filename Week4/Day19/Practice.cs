@@ -176,13 +176,106 @@ SELECT * FROM EMP
 WHERE DEPTNO IN (20, 30);
 
 
+-------------------------------------------------------------------------------------------------
+//ANY
+SELECT * FROM EMP
+WHERE SAL = ANY(SELECT MAX(SAL) FROM EMP GROUP BY DEPTNO);
+
+-------------------------------------------------------------------------------------------------
+//ALL
+SELECT * FROM EMP
+WHERE SAL < ALL(SELECT SAL FROM EMP WHERE DEPTNO = 30);
 
 
-
-
+-------------------------------------------------------------------------------------------------
+//삽입(테이블에)
+INSERT INTO DEPT_TEMP(DEPTNO, DNAME, LOC)
+VALUES(50, 'DATABASE', 'SEOUL');
 using Oracle.ManagedDataAccess.Client;
 
-namespace ConsoleApp16
+-------------------------------------------------------------------------------------------------
+//UPDATE 수정
+UPDATE DEPT_TEMP2
+SET LOC = 'SEOUL'
+WHERE DEPTNO = 10;
+
+
+-------------------------------------------------------------------------------------------------
+//ROLLBACK;--되돌림 커밋 전이면.
+
+
+-------------------------------------------------------------------------------------------------
+//테이블 삭제
+DROP TABLE EMP_TEMP;
+
+
+-------------------------------------------------------------------------------------------------
+//테이블 복사 생성
+CREATE TABLE EMP_TEMP
+AS SELECT * FROM EMP;
+
+
+-------------------------------------------------------------------------------------------------
+//12장 시작--ALTER TABLE
+CREATE TABLE EMP_ALTER
+ AS SELECT * FROM EMP;
+ 
+ SELECT * FROM EMP EMP_ALTER;
+
+
+-------------------------------------------------------------------------------------------------
+//컬럼 추가
+ALTER TABLE EMP_ALTER
+ADD HP VARCHAR2(20);
+
+-------------------------------------------------------------------------------------------------
+//컬럼 이름 변경 RENAME COLUMN
+ALTER TABLE EMP_ALTER
+RENAME COLUMN HP TO TEL;
+DESC EMP_ALTER;
+
+-------------------------------------------------------------------------------------------------
+//컬럼 TYPE(자료형)DMF QUSRUD MODIFY
+ALTER TABLE EMP_ALTER
+MODIFY EMPNO NUBER(6);
+
+
+-------------------------------------------------------------------------------------------------
+//컬럼을 삭제 DROP COLUMN
+ALTER TABLE EMP_ALTER
+DROP COLUMN TEL;
+
+
+-------------------------------------------------------------------------------------------------
+//테이블 이름 변경 RENAME [COLUMN은 RENAME뒤에 COLUMN 적었는데 테이블은 X]
+RENAME EMP_ALTER TO EMP_RENAME;
+
+
+-------------------------------------------------------------------------------------------------
+//테이블의 데이터를 삭제하는 TRUNCATE --잘 안 쓰임 있다는 것만 알아두삼
+TRUNCATE TABLE EMP_RENAME;
+
+
+-------------------------------------------------------------------------------------------------
+//SQL DEVELOPER를 사용하지 않고 VISUAL STUDIO에서 ORACLE 설치하고 코드로 DB에 접속하여
+테이블을 만들어 보았다.
+-------------------------------------------------------------------------------------------------
+//PERSON 테이블 있으니까 접속 C#으로
+OracleCommand cmd = new OracleCommand();
+cmd.Connection = conn;
+
+cmd.CommandText = "CREATE TABLE PERSON" +
+    "(ID number(4), " +
+    "NAME varchar(20), " +
+    "TEL varchar(20))";
+cmd.ExecuteNonQuery();
+
+
+-------------------------------------------------------------------------------------------------
+//테이블에 자료를 넣어본 예시 코드
+using Oracle.ManagedDataAccess.Client;
+
+namespace _20240719_OracleTableAppCreate
 {
     internal class Program
     {
@@ -190,36 +283,27 @@ namespace ConsoleApp16
         {
             string strConn = "Data Source=(DESCRIPTION=" +
                 "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)" +
-                "(HOST=localhost)(PORT=9000)))" +
+                "(HOST=localhost)(PORT=1521)))" +
                 "(CONNECT_DATA=(SERVER=DEDICATED)" +
                 "(SERVICE_NAME=xe)));" +
-                "User Id=scott;Password=tiger;";
-
-            //1. 연결 격체 만들기 - Client
+                "User Id=SCOTT;Password=TIGER;";
+            // 연결 객체
             OracleConnection conn = new OracleConnection(strConn);
-
-            //2.데이터베이스 접속을 위한 연결
+            // 데이터베이스 접속 연결
             conn.Open();
 
-            //3.서버와 함께 신나게 놀기
-
-            //3.1 Query 명령객체 만들기
-
             OracleCommand cmd = new OracleCommand();
-            cmd.Connection = conn; //연결객체와 연동
+            cmd.Connection = conn;
+            cmd.CommandText = "INSERT INTO PERSON (ID, NAME, TEL) " +
+                              "VALUES (:ID, :NAME, :TEL)";
 
-            //3.2 명령하기, 테이블 생성하기
-            cmd.CommandText = "CREATE TABLE PERSON " +
-                "(ID number(4)   " +
-                "NAME varchar(20), " +
-                "HP varchar(20))";
+            cmd.Parameters.Add(new OracleParameter("ID", 1));
+            cmd.Parameters.Add(new OracleParameter("NAME", "홍길동"));
+            cmd.Parameters.Add(new OracleParameter("TEL", "010-1111-1111"));
 
-            //3.3 쿼리 실행하기
             cmd.ExecuteNonQuery();
 
-            //4. 리소스 반환 및 종료
             conn.Close();
-
         }
     }
-}
+}   
