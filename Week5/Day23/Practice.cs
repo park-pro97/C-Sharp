@@ -94,17 +94,109 @@ namespace ExceptionApp01
     }
 }
 ------------------------------------------------------------------------------------
-//
+// 종합예제
+namespace ExceptionApp02
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 1, 2, 3 };
+
+            try
+            {
+                // 얘는 강제로 발생시킨다 --- 그래서 catch의 부모 예외 클래스에 잡혔습니다.가 출력됨.
+                //throw new Exception();
+                int a = 5;
+                int b = 6;
+                int result = a / b;
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine(arr[i]);
+                }
+            }
+            catch(IndexOutOfRangeException ex)
+            {
+            Console.WriteLine("배열의 범위를 벗어났습니다.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("부모 예외 클래스에 잡혔습니다.");
+            }
+            //무조건 실행
+            finally
+            {
+                Console.WriteLine("무조건 실행하는 finally");
+            }
+
+
+            Console.WriteLine("종료");
+        }
+    }
+}
 
 
 ------------------------------------------------------------------------------------
-//
+//코드로 txt파일 만들기
+namespace FileTest01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //밑은 경로 잡아주는거
+            string path = "c:\\Temp\\abc.txt";
+            string content = "Hello World~!";
+
+            File.WriteAllText(path, content);
+
+            Console.WriteLine("파일 작성 성공");
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
-//
+//코드로 txt파일 만들고 / 읽어오기 추가됨
+namespace FileTest01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //밑은 경로 잡아주는거
+            string path = "c:\\Temp\\abc.txt";
+            string content = "안녕?ㅋㅋ C# 파일 읽고 쓰기 연습";
+
+            File.WriteAllText(path, content);
+
+            Console.WriteLine("파일 작성 성공");
+            
+            //읽기 부분 추가
+            string words = File.ReadAllText(path);
+            Console.WriteLine(words);
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
-//
+//했는데 파일안의 내용은 없음 ( 리소스 반환이 필요함) 주석 지우고 파일 닫아줘야 출력됨
+namespace FileTest02
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"C:\Temp\\hello.txt";
+            string content = "안녕하세요. 인사 파일입니다.";
+
+            StreamWriter writer = new StreamWriter(path);  // 아까보다 C#스러운 방식
+            writer.WriteLine(content);
+
+            //writer.Close();
+            Console.WriteLine("현재 프로그램이 종료됩니다.");
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
 //
