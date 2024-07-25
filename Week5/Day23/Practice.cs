@@ -247,10 +247,51 @@ namespace Linq01
 }
 
 ------------------------------------------------------------------------------------
-//
+//알파벳 역순  linq로 출력
+namespace Linq02
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            char ch = 'A';
+            char[] alpabets = new char[26];
+
+            for (int i = 0; i < 26; i++)
+                alpabets[i] = ch++;
+
+            //Linq
+            var result = from c in alpabets
+                         orderby c descending
+                         select c;
+            foreach (char e in result)
+            {
+                Console.Write(e + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
-//
+//Linq 연습
+namespace LinqStandardTest01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = { 1, 3, 5, 7, 9, 11, 13, 15 };
+
+            int even = numbers.FirstOrDefault(n => n % 2 == 0);
+
+            if (even == 0)
+                Console.WriteLine("짝수가 없다");
+            else
+                Console.WriteLine(even);
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
 //
