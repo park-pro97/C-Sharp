@@ -384,11 +384,70 @@ namespace LamdaTest01
 
 ------------------------------------------------------------------------------------
 //
+namespace LamdaTest02
+{
+    internal class Program
+    {
+        delegate int? MyDivide(int a, int b); // int 뒤에? 붙이면 널값도 받을 수 있다.
+        static void Main(string[] args)
+        {
+
+
+            MyDivide myFunc = (a, b) =>
+            {
+                if (b == 0)
+                    return null;
+                return a / b;
+            };
+        }
+    }
+}
 
     
 ------------------------------------------------------------------------------------
-//
+//활용한 간단한 출력
+namespace LamdaTest03
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Action<string> logOut = (txt) =>
+            {
+                Console.WriteLine(DateTime.Now + ": " + txt);
+            };
+
+            logOut("This is my world!");
+            Func<double> pi = () => 3.141592;
+
+            Console.WriteLine(pi());
+        }
+    }
+}
 
 
 ------------------------------------------------------------------------------------
 //
+namespace LamdaTest04
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Action act1 = () => Console.WriteLine("Action()");
+            act1();
+
+            int result = 0;
+            Action<int> act2 = (x) => result = x * x;
+            act2(3);
+            Console.WriteLine(result);
+
+            Action<double, double> act3 = (x, y) =>
+            {
+                double pi = x / y;
+                Console.WriteLine(pi);
+            };
+            act3(22.02, 7.0);
+        }
+    }
+}
