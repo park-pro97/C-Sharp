@@ -354,7 +354,32 @@ namespace LinqExam03
 }
 
 ------------------------------------------------------------------------------------
-//
+//람다식 연습
+namespace LamdaTest01
+{
+    class Calculator
+    {
+        public int Plus(int a, int b)
+        {
+            return a + b;
+        }
+    }
+    internal class Program
+    {
+        delegate int Calculate(int a, int b);
+        static void Main(string[] args)
+        {
+            //Calculate calc = (int a, int b) => a + b;
+
+            Calculate calc = delegate (int a, int b)
+            {
+                return a + b;
+            };
+
+            Console.WriteLine(calc(100,200));
+        }
+    }
+}
 
 
 ------------------------------------------------------------------------------------
