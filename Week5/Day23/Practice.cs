@@ -199,10 +199,52 @@ namespace FileTest02
 }
 
 ------------------------------------------------------------------------------------
-//
+//LINQ 2의배수
+namespace Linq01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = { 9, 2, 6, 4, 5, 3, 7, 8, 1, 10 };
+
+            var result = from n in numbers
+                         where n % 2 == 0
+                         orderby n
+                         select n;
+
+            foreach(int n in result)
+            {
+                Console.Write(n + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
-//
+//3의 배수 내림차순
+namespace Linq01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = { 9, 2, 6, 4, 5, 3, 7, 8, 1, 10 };
+
+            var result = from n in numbers
+                         where n % 3 == 0
+                         orderby n descending //이게 내림차순 정렬
+                         select n;
+
+            foreach(int n in result)
+            {
+                Console.Write(n + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
 
 ------------------------------------------------------------------------------------
 //
