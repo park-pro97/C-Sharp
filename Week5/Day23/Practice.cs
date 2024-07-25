@@ -1,4 +1,4 @@
-//
+//List와 ArrayList
 using System.Collections;
 
 namespace _20240725_ListApp01
@@ -27,17 +27,72 @@ namespace _20240725_ListApp01
 
 
 ------------------------------------------------------------------------------------
-//
-
+//Stack
+namespace _20240725_StackTest01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1); stack.Push(2); stack.Push(3);
+            while (stack.Count > 0) { Console.WriteLine(stack.Pop()); }
+        }
+    }
+}
 ------------------------------------------------------------------------------------
-//
-
+//Queue
+namespace _20240725_QueueApp01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Queue<string> que = new Queue<string>();
+            que.Enqueue("사과"); que.Enqueue("딸기"); que.Enqueue("배");
+            while (que.Count > 0) { Console.WriteLine(que.Dequeue()); }
+        }
+    }
+}
 ------------------------------------------------------------------------------------
-//
+//Hashtable       [Key(키)와 Value(값)가 둘 다 존재]
+using System.Collections;
 
+namespace _20240725_HashtableApp01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Hashtable ht = new Hashtable();
+            ht["하나"] = "one"; ht["둘"] = "two" ; ht["셋"] = "three"; ht["넷"] = "four";
+            Console.WriteLine(ht["하나"]);
+            Console.WriteLine(ht["둘"]);
+            Console.WriteLine(ht["셋"]);
+            Console.WriteLine(ht["넷"]);
+        } 
+    }
+}
 ------------------------------------------------------------------------------------
-//
+//예외처리     try~catch와 finally
 
+    [특정 오류에 대해 메시지를 설정할 수도 있음.             Finally = 무조건 실행되는 구문]
+    
+namespace _20240725_ExceptionApp01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // 에러가 나는 부분에 try~catch 이용하기
+            int a = 5; int b = 0;
+            try { int result = a / b; Console.WriteLine(result); }
+            catch (DivideByZeroException e) { Console.WriteLine("0으로 나누는 예외가 발생하였습니다."); }
+            catch (Exception ex) { Console.WriteLine("예외가 발생하였습니다."); }
+            finally { Console.WriteLine("무조건 실행되는 구문"); }
+        }
+    }
+}
 ------------------------------------------------------------------------------------
 //
 
