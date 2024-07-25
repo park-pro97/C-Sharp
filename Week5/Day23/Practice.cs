@@ -1,7 +1,7 @@
 //List와 ArrayList
 using System.Collections;
 
-namespace _20240725_ListApp01
+namespace ListApp01
 {
     internal class Program
     {
@@ -28,7 +28,7 @@ namespace _20240725_ListApp01
 
 ------------------------------------------------------------------------------------
 //Stack
-namespace _20240725_StackTest01
+namespace StackTest01
 {
     internal class Program
     {
@@ -42,7 +42,7 @@ namespace _20240725_StackTest01
 }
 ------------------------------------------------------------------------------------
 //Queue
-namespace _20240725_QueueApp01
+namespace QueueApp01
 {
     internal class Program
     {
@@ -58,7 +58,7 @@ namespace _20240725_QueueApp01
 //Hashtable       [Key(키)와 Value(값)가 둘 다 존재]
 using System.Collections;
 
-namespace _20240725_HashtableApp01
+namespace HashtableApp01
 {
     internal class Program
     {
@@ -78,7 +78,7 @@ namespace _20240725_HashtableApp01
 
     [특정 오류에 대해 메시지를 설정할 수도 있음.             Finally = 무조건 실행되는 구문]
     
-namespace _20240725_ExceptionApp01
+namespace ExceptionApp01
 {
     internal class Program
     {
