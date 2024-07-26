@@ -84,7 +84,6 @@ namespace File01
         }
     }
 }
-
 ---------------------------------------------------------------------------
 //읽고 쓰기
 namespace File01
@@ -117,8 +116,38 @@ namespace File01
     }
 }
 ---------------------------------------------------------------------------
-//
+//파일 퀴즈 1번쓰기 2번 읽기
+namespace File01
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"C:\temp\result1.txt";
+            FileInfo fi =  new FileInfo(path);
+            using (StreamWriter sw = fi.CreateText())
+            {
+                for(int i = 1; i <= 100; i++)
+                {
+                    if(i % 5 == 0)
+                        sw.Write (i + " ");
+                }
 
+            }
+            //읽기
+            using (StreamReader sr = fi.OpenText())
+            {
+                var s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+
+
+        }
+    }
+}
 ---------------------------------------------------------------------------
 //
 
