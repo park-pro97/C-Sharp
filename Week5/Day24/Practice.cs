@@ -149,7 +149,34 @@ namespace File01
     }
 }
 ---------------------------------------------------------------------------
-//
+//이미지 복사
+namespace Fileex_NewJeans
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"C:\Temp\newjeans.png";
+            string copyPic = @"C:\Temp\CopyNewJeans.png";
+
+            try
+            {
+                byte[] pictureBytes = File.ReadAllBytes(path);
+                File.WriteAllBytes(copyPic, pictureBytes);
+                Console.WriteLine("복사 성공");
+            }
+            catch(Exception Ex)
+            {
+
+                Console.WriteLine(Ex.Message);
+            }
+            
+
+
+            
+        }
+    }
+}
 
 ---------------------------------------------------------------------------
 //
