@@ -346,3 +346,145 @@ namespace Consolemk1
 
 ------------------------------------------------------------
 // 윈폼으로 데이터 그리드 실습 진행
+
+  
+//DataGridView 컨트롤을 Form으로
+privatevoidForm1_Load(objectsender, EventArgse)
+{
+	this.dataGridView.Columns.Add("No", "No");
+	this.dataGridView.Columns.Add("Name", "Name");
+	this.dataGridView.Columns.Add("HP", "HP");
+	this.dataGridView.Rows.Add("1", "홍길동", "010-1111-1111");
+	this.dataGridView.Rows.Add("2", "이순신", "010-2222-2222");
+}
+
+// 버튼에 삽입기능 넣기
+privatevoidForm1_Load(objectsender, EventArgse)
+{
+	dataGridView1.Columns.Add("No", "번호");
+	dataGridView1.Columns.Add("Name", "이름");
+}
+privatevoidbutton1_Click(objectsender, EventArgse)
+{
+	dataGridView1.Rows.Add("1", "홍길동");
+}
+
+------------------------------------------------------------
+//text박스 안의 내용이 버튼 누르면 올라감
+namespace dataGrid01
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dataGridView.Columns.Add("ID", "개별번호");
+            dataGridView.Columns.Add("Name", "이름");
+            dataGridView.Columns.Add("HP", "전화번호");
+
+            // 데이터 추가
+            //dataGridView.Rows.Add("1", "홍길동", "010-1111-1111");
+            //dataGridView.Rows.Add("2", "이순신", "010-2222-2222");
+        }
+        // 버튼에 기능 삽입
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridView.Rows.Add(tbID.Text, tbName.Text, tbHP.Text);
+        }
+    }
+}
+------------------------------------------------------------
+//객체 코드
+namespace dataGrid02
+{
+    class Student
+    {
+        public string No { get; set; }
+        public string Name { get; set; }
+        public string HP { get; set; }
+    }
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Data 만들기
+            var dataList = new List<Student>()
+            {
+                new Student { No = "1", Name = "홍길동", HP = "010-1111-1111"},
+                new Student { No = "2", Name = "이순신", HP = "010-2222-2222"},
+                new Student { No = "3", Name = "을지문덕", HP = "010-3333-3333"},
+                new Student { No = "4", Name = "강감찬", HP = "010-4444-4444"}
+            };
+            dataGridView1.DataSource = dataList;
+        }
+    }
+}
+------------------------------------------------------------
+//Oracle에서 데이터 가져오기
+  
+  --1. 테이블 부터 만들고
+  
+SELECT * FROM STUDENT;
+DROP TABLE STUDENT;
+
+CREATE TABLE student(
+    id      number(5) primary key,
+    name    varchar2(30) not null,
+    hp      varchar2(13)
+);
+
+INSERT INTO student
+values (1, '홍길동', '010-1111-1111');
+INSERT INTO student
+values (2, '이순신', '010-2222-2222');
+
+commit;
+------------------------------------------------------------
+  -- C#윈폼에서 쓰인 코드
+using Oracle.ManagedDataAccess.Client;
+using System.Data;
+
+namespace _20240805_DataGridViewOracleConnect
+{
+    public partial class Form1 : Form
+    {
+        private string connectionString = "User Id=scott;Password=TIGER;Data Source=localhost:1521/XE;";
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT id, name, hp FROM student";
+                    // 브로커 패턴 = 데이터를 맞춰주는 역할
+                    OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
+
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    // DataSource
+                    dataGridView1.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"에러 : {ex.Message}");
+                }
+            }
+        }
+    }
+}
