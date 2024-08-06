@@ -148,6 +148,14 @@ namespace DataGridApp
         }
     }
 }
+
+---------------------------------------------------------------------------------
+//Form1의 버튼으로 Form2 열 때 사용하는 코드
+private void btnOpenForm2_Click(object sender, EventArgs e)
+{
+    Form2 frm2 = new Form2();
+    frm2.ShowDialog();
+}
 ---------------------------------------------------------------------------------
 //form1
 using AccessForm;
