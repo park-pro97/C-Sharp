@@ -1,3 +1,26 @@
+//사진3개 동작
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+namespace Page179n1
+{
+    public partial class Form1 : Form
+    {
+        private int Sajin = 1;
+        private int Sajin_Max = 4;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Image.FromFile(System.Environment.CurrentDirectory + "/RPG/" +
+            Sajin + ".jpg");
+            Sajin++;
+            if (Sajin > Sajin_Max)
+                Sajin = 1;
+        }
+    }
+}
+-------------------------------------------------------------------------------------
 //ProgressBar
 namespace WinFormsApp17
 {
