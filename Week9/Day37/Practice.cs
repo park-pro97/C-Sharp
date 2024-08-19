@@ -280,13 +280,185 @@ namespace BinaryReaderWriter1
         }
     }
 }
----------------------------------------------------------------------------------
-//
 
 ---------------------------------------------------------------------------------
-//
+//MultiThread Console_Server
+using System.Data;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
+namespace MultiThreadServer01
+{
+    internal class Program
+    {
+        static int cnt = 0;
+        private static void serverFunc(object obj)
+        {
+            using (Socket srvSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            {
+                IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 13000);
+                srvSocket.Bind(endPoint);
+                srvSocket.Listen(50);
+
+                Console.WriteLine("서버 시작...");
+                while (true)
+                {
+                    // Client Socket의 위치를 알게 됨 (Accept로 인해)
+                    Socket cliSocket = srvSocket.Accept();
+                    cnt++;
+
+                    // Client에서 받은 일을 처리 - Thread로 만들어서 처리
+                    // 1대多 를 1대1 로 만들어주는 과정
+                    Thread workThread = new Thread(new ParameterizedThreadStart(workFunc));
+                    workThread.IsBackground = true;
+
+                    workThread.Start(cliSocket);
+                }
+            }
+        }//end of servFunc
+
+        private static void workFunc(object obj)
+        {
+            byte[] recvBytes = new byte[1024];
+            Socket cliSocket = (Socket)obj;
+            int nRecv = cliSocket.Receive(recvBytes);
+
+            string txt = Encoding.UTF8.GetString(recvBytes, 0, nRecv);
+            Console.WriteLine($"클라이언트 번호 ({cnt}) : {txt}");
+            byte[] sendBytes = Encoding.UTF8.GetBytes("Hello : " + txt);
+            cliSocket.Send(sendBytes);
+            cliSocket.Close();
+        }
+
+        static void Main(string[] args)
+        {
+            Thread serverThread = new Thread(serverFunc);
+            serverThread.IsBackground = true;
+            serverThread.Start();
+
+            serverThread.Join();
+            Console.WriteLine("서버 프로그램을 종료합니다.");
+        }
+    }
+}
+
 ---------------------------------------------------------------------------------
-//
+//MultiThread Console_Client
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace MultiThreadClient
+{
+    internal class Program
+    {
+        static void clientFunc(object obj)
+        {
+            try
+            {
+                //1.소켓만들기
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                //2.연결
+                //EndPoint serverEP = new IPEndPoint(IPAddress.Loopback, 10000);
+                //IP에 접속하고 싶은 IP를 입력해줄 것
+                EndPoint serverEP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 13000);
+                socket.Connect(serverEP);
+                //3.Read, Write
+                //write
+                //byte[] buffer = Encoding.UTF8.GetBytes(DateTime.Now.ToString());
+                byte[] buffer = Encoding.UTF8.GetBytes("푸바오 사랑해~~");
+                socket.Send(buffer);
+
+                //read
+                byte[] recvBytes = new byte[1024];
+                int nRecv = socket.Receive(recvBytes);
+
+                string txt = Encoding.UTF8.GetString(recvBytes, 0, nRecv);
+                Console.WriteLine(txt);
+                //4.종료
+                socket.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Thread clientThread = new Thread(clientFunc);
+            clientThread.Start();
+            clientThread.IsBackground = true;
+            clientThread.Join();
+
+            Console.WriteLine("클라이언트가 종료 되었습니다.");
+        }
+    }
+}
+---------------------------------------------------------------------------------
+//IP 교수님 걸로 찍고 메시지 보내기
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace MultiThreadClient
+{
+    internal class Program
+    {
+        static void clientFunc(object obj)
+        {
+            try
+            {
+                //1.소켓만들기
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                //2.연결
+                //EndPoint serverEP = new IPEndPoint(IPAddress.Loopback, 10000);
+                //IP에 접속하고 싶은 IP를 입력해줄 것
+                EndPoint serverEP = new IPEndPoint(IPAddress.Parse("192.168.81.71"), 13000);
+                socket.Connect(serverEP);
+                //3.Read, Write
+                //write
+                //byte[] buffer = Encoding.UTF8.GetBytes(DateTime.Now.ToString());
+                byte[] buffer = Encoding.UTF8.GetBytes(""); // 여기
+                socket.Send(buffer);
+
+                //read
+                byte[] recvBytes = new byte[1024];
+                int nRecv = socket.Receive(recvBytes);
+
+                string txt = Encoding.UTF8.GetString(recvBytes, 0, nRecv);
+                Console.WriteLine(txt);
+                //4.종료
+                socket.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Thread clientThread = new Thread(clientFunc);
+            clientThread.Start();
+            clientThread.IsBackground = true;
+            clientThread.Join();
+
+            Console.WriteLine("클라이언트가 종료 되었습니다.");
+        }
+    }
+}
 ---------------------------------------------------------------------------------
 //
 ---------------------------------------------------------------------------------
