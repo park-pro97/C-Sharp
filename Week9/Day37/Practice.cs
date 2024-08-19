@@ -1,5 +1,4 @@
 //네트워크
-
     namespace network1
     {
         internal class Program
