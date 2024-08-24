@@ -94,25 +94,165 @@
 </html>
 -----------------------------------------------------------------
 //
-
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background-image: url("../img/gradient_bg.png");
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p><img src="../img/rose.jpg"></p>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//CSS 목록 작성
+<html>
+<head>
+    <style>
+        li{
+            list-style: armenian;
+        }
+    </style>
+</head>
+<body>
+    <h3>★녹색 문화 체험여행</h3>
+    <ul>
+        <li>숲 체험 : 수목원 탐방</li>
+        <li>곤충 체험 : 곤충 체험</li>
+        <li>생태 체험 : 생태 체험</li>
+    </ul>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//Border 코드 실습
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #border1{
+            border: solid 1px #ff0000;
+        }
+        #border2{
+            border: double 5px #00ff00;
+        }
+        #border3{
+            border-top: dotted 4px #0000ff;
+            border-bottom: dashed 4px #ff00ff;
+        }
+        #border4{
+            border-left: solid 5px #ffff00;
+            border-right: solid 5px #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="border1">봄빛 식물원</h3>
+    <h3 id="border2">봄빛 식물원</h3>
+    <h3 id="border3">봄빛 식물원</h3>
+    <h3 id="border4">봄빛 식물원</h3>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//둥근 경계선을 만들어보는 코드
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #login_box{
+            width: 200px; height: 150px;
+            background-color: #eee;
+            border: solid 2px #aaa;
+            border-radius: 15px;
+            box-shadow: 6px 6px 5px #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="login_box">로그인 화면</div>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+/시시계 방향으로 Top부터 돌면서 Margin 수치가 순차적 적용 [4방향]
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p{
+            width: 500px;
+            border: solid 5px #50f;
+            margin: 20px 40px 60px 80px
+        }
+    </style>
+</head>
+<body>
+    <p>
+        식물원은 종종 대학이나 다른 과학 연구 기관들에 의해 운영되며,
+         식물 분류학이나 식물 과학의 다른 측면에 있는 헤르바리아와 
+         연구 프로그램들을 종종 연관시켜왔다. 
+         원칙적으로, 그들의 역할은 과학적 연구, 보존, 전시, 그리고 교육의 
+        목적을 위해 문서화된 살아있는 식물의 컬렉션을 유지하는 것이다.
+    </p>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//padding 속성을 부여하는 코드
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p{
+            width: 500px;
+            border: solid 5px #50f;
+            padding: 10px 20px 30px 40px
+        }
+    </style>
+</head>
+<body>
+    <p>
+        식물원은 종종 대학이나 다른 과학 연구 기관들에 의해 운영되며,
+         식물 분류학이나 식물 과학의 다른 측면에 있는 헤르바리아와 
+         연구 프로그램들을 종종 연관시켜왔다. 
+         원칙적으로, 그들의 역할은 과학적 연구, 보존, 전시, 그리고 교육의 
+        목적을 위해 문서화된 살아있는 식물의 컬렉션을 유지하는 것이다.
+    </p>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//책 페이지 만들기
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #banner{
+            width: 185px; height: 236px;
+            background-image: url("./img/banner_bg.jpg");
+            border: solid 1px #ccc;
+        }
+        #banner img{
+            margin:202px 0 0 50px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>저자 : 황재호</li>
+        <li>출판사 : 한빛미디어</li>
+        <li>가격 : 30,000원</li>
+    </ul>
+    <div id="banner">
+        <img src="./img/buy.png">
+    </div>
+</body>
+</html>
 -----------------------------------------------------------------
 //
 
