@@ -454,31 +454,465 @@
 </body>
 </html>
 
-
-
 -----------------------------------------------------------------
-//
-
+//로그인 폼
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+        ul{
+          list-style-type:none;  
+        }
+        body{
+            font-family:"맑은 고딕", "돋움";
+            font-size: 24px;
+            color: #444;
+        }
+        #login_box{
+            width: 400px; height: 160px;
+            border: solid 1px #bbbbbb;
+            border-radius: 15px;
+            margin: 20px 0 0 20px;
+            padding: 20px 0 0 30px;
+        }
+        h2{
+            font-family: "Arial";
+            margin-bottom: 10px;
+        }
+        #login_box input{
+            width: 200; height: 36px;
+        }
+        #id_pass, #login_btn{
+            display: inline-block;
+            vertical-align: top;
+        }
+        #id_pass span{
+            display: inline-block;
+            width: 40px;
+        }
+        #pass{
+            margin-top: 6px;
+        }
+        #login_btn button{
+            margin-left: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #btns{
+            margin: 12px 0 0 -12px;
+            text-decoration: underline;
+            font-size: 20px;
+        }
+        #btns li{
+            margin-left: 10px;
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div id="login_box">
+            <h2>Member Login</h2>
+            <ul id="input_button">
+                <li id="id_pass">
+                    <ul>
+                        <li>
+                            <span>ID</span>
+                            <input type="text">
+                        </li> <!-- ID -->
+                    </ul>
+                </li>
+                <li id="login_btn">
+                    <button>로그인</button>
+                </li>
+            </ul>
+            <ul id="btns">
+                <li>회원가입</li>
+                <li>아이디/비밀번호 찾기</li>
+            </ul>
+        </div> <!-- login Box -->
+    </form>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//HTML5 레이아웃
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .clear {
+            clear: both;
+        }
+        aside{
+            width: 175px; height: 398px;
+            float: left; padding: 2px;
+            border: solid 2px #f00;
+        }
+        nav{
+            height: 150px;
+            border: solid 2px #00f;
+            margin-bottom: 50px;
+            margin: 2px;
+        }
+        header{
+            width: 800px; height: 60px;
+            border: solid 2px #f00;
+            margin: 2px;
+        }
+        main{
+            width: 618px; height: 400px;
+            margin-left: 2px;
+            float: left;
+            border: solid 2px #00f;
+        }
+        section{
+            width: 500px; height: 150px;
+            margin: 2px;
+            border: solid 2px #0f0;
+        }
+        footer{
+            width: 800px; height: 90px;
+            border: solid 2px #f00;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!--------------- Header --------------->
+    <header>상단 헤더</header>
+    <aside>좌측
+        <nav>메뉴</nav>
+    </aside>
+    <main>메인 콘텐츠
+        <section>콘텐츠 1</section>
+        <section>콘텐츠 2</section>
+    </main>
+    <div class="clear"></div>
+    <!--------------- footer --------------->
+    <footer>하단 헤더(푸터)</footer>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//Float가 없는 코드와 있는 코드를 각각 만들어 차이
+//Float가 없는
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div{
+            width: 150px; height: 80px;
+            border: solid 2px #00f;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div>박스 A</div>
+    <div>박스 B</div>
+</body>
+</html>
 -----------------------------------------------------------------
-//
-
+//Float가 없는 코드와 있는 코드를 각각 만들어 차이
+//Float가 있는
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div{
+            width: 150px; height: 80px;
+            border: solid 2px #00f;
+            margin-top: 2px;
+        }
+        #box_a{
+            float: left;
+        }
+        #box_b{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="box_a">박스 A</div>
+    <div id="box_b">박스 B</div>
+</body>
+</html>
 -----------------------------------------------------------------
-//
+//About Clear
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 여기서 float = inline-block과 비슷한 효과 -->
+    <style>
+        .items{
+            border: solid 3px #000;
+            margin: 5px;
+            float: left;
+        }
+        .items img{
+            display: block;
+        }
+        .clear{
+            clear: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="items"><img src="img/image1.jpg"></div>
+    <div class="items"><img src="img/image2.jpg"></div>
+    <div class="items"><img src="img/image3.jpg"></div>
 
------------------------------------------------------------------
-//
+    <div class="clear"></div>
 
+    <div class="items"><img src="img/image4.jpg"></div>
+    <div class="items"><img src="img/image5.jpg"></div>
+    <div class="items"><img src="img/image6.jpg"></div>
+</body>
+</html>
 -----------------------------------------------------------------
-//
+//Clear를 이용한 배너 레이아웃
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+        body{
+            background-color: #f2f0f0;
+            font-family: "맑은 고딕";
+            font-size: 12px; color: #444444;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #logo{
+            padding: 30px 0 0 30px;
+            float: left;
+        }
+        #top_menu{
+            margin: 40px 10px 0 5px;
+            float: right;
+        }
+        #top_menu li{
+            display: inline;
+        }
+        #main_menu{
+            font-size: 12px; color: #ffffff;
+            background-color: #4e4c4d;
+            margin-top: 15px;
+            padding: 12px;
+            text-align: center;
+        }
+        #main_menu li{
+            padding: 0 20px 0 20px;
+            display: inline;
+        }
+        .clear{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">
+        <img src="img/logo2.gif">
+    </div>
+    <ul id="top_menu">
+        <li>로그인 |</li>
+        <li>회원가입 |</li>
+        <li>마이페이지 |</li>
+        <li>주문배송 조회 |</li>
+        <li>장바구니 |</li>
+        <li>이용안내 |</li>
+        <li>고객센터 |</li>
+    </ul>
 
------------------------------------------------------------------
-//
+    <dib class="clear"></dib>
 
+    <ul id="main_menu">
+        <li>다연아트 소개</li>
+        <li>상품 Q&A</li>
+        <li>시안 확인</li>
+        <li>고객 갤러리</li>
+        <li>공지사항</li>
+    </ul>
+</body>
+</html>
 -----------------------------------------------------------------
-//
+//쇼핑몰 상품 레이아웃
+<!DOCTYPE html>
+<html>
+    <title>롤 스크린 쇼핑몰</title>
+<head>
+    <style>
+        body{
+            font-family: "돋움"; font-size: 12px;
+            color: #444;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #new h3{
+            padding-bottom: 5px;
+            border-bottom: solid 2px #9bc32a;
+        }
+        #new h3 span{
+            color: #80a727;
+        }
+        #new .item{
+            float: left; margin-top: 20px;
+            text-align: center;
+        }
+        #new .subject{
+            margin-top: 10px; color: #80a727;
+        }
+        #new .comment{
+            margin-top: 5px; color: #888;
+        }
+        #new .price{
+            margin-top: 5px; color: red;
+            font-weight: bold;
+        }
+        .clear{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="new">
+        <h3><span>NEW ARRIVAL</span> 신규상품</h3>
+        <ul class="item">
+            <li><img src="img/new_01.jpg"></li>
+            <li class="subject">맞춤제작(풍경)</li>
+            <li class="comment">원하는 사이즈로 제작 가능</li>
+            <li class="price">20,000원</li>
+        </ul>
+        <ul class="item">
+            <li><img src="img/new_02.jpg"></li>
+            <li class="subject">맞춤제작(풍경)</li>
+            <li class="comment">원하는 사이즈로 제작 가능</li>
+            <li class="price">20,000원</li>
+        </ul>
+        <ul class="item">
+            <li><img src="img/new_03.jpg"></li>
+            <li class="subject">맞춤제작(풍경)</li>
+            <li class="comment">원하는 사이즈로 제작 가능</li>
+            <li class="price">20,000원</li>
+        </ul>
+
+        <div class="clear"></div>
+
+        <ul class="item">
+            <li><img src="img/new_04.jpg"></li>
+            <li class="subject">맞춤제작(풍경)</li>
+            <li class="comment">원하는 사이즈로 제작 가능</li>
+            <li class="price">20,000원</li>
+        </ul>
+        <ul class="item">
+            <li><img src="img/new_05.jpg"></li>
+            <li class="subject">맞춤제작(풍경)</li>
+            <li class="comment">원하는 사이즈로 제작 가능</li>
+            <li class="price">20,000원</li>
+        </ul>
+        <ul class="item">
+            <li><img src="img/new_06.jpg"></li>
+            <li class="subject">맞춤제작(풍경)</li>
+            <li class="comment">원하는 사이즈로 제작 가능</li>
+            <li class="price">20,000원</li>
+        </ul>
+    </div>
+</body>
+</html>
+-----------------------------------------------------------------
+//1차 보험 웹사이트 레이아웃
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+        header{
+            padding: 20px;
+        }
+        header #logo{
+            float: left;
+        }
+        header #moto{
+            margin-left: 10px; margin-top: 30px;
+            float: left;
+        }
+        header #top_menu{
+            float: right; font-size: 12px;
+        }
+        li{
+            list-style-type: none;
+            display: inline;    
+        }
+        .line{
+            margin-top: 25px;
+            border-top: solid 1px #ccc;
+        }
+        nav #sec_menu{
+            float: left; margin-top: 10px;
+        }
+        .clear { clear: both; }
+        section{
+            padding: 0 20px 0 20px; margin-left: 20px;
+            background-image: url("img/banner_bar.gif");
+            border: solid 1px;
+            float: left;
+        }
+        section #banner{
+            margin: 10px 15px 0 0; 
+        }
+        article{
+            border: solid 2px rgb(7, 222, 222);
+            float: left; margin: 10px 0 0 20px;
+        }
+        article img{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img id="logo" src="img/logo.gif">
+        <img id="moto" src="img/moto.gif">
+    
+        <ul id="top_menu">
+            <li>로그인 |</li>
+            <li>회원가입 |</li>
+            <li>사이트맵 |</li>
+            <li>회사 소개 |</li>
+        </ul>
+
+        <div class="clear"></div>
+        <div class="line"></div>
+        
+        <nav>
+            <ul id="sec_menu">
+                <li><img src="img/menu01.gif"></li>
+                <li><img src="img/menu02.gif"></li>
+                <li><img src="img/menu03.gif"></li>
+                <li><img src="img/menu04.gif"></li>
+                <li><img src="img/menu05.gif"></li>
+           </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <img id="banner" src="img/banner01.gif">
+            <img id="banner" src="img/banner02.gif">
+            <img id="banner" src="img/banner03.gif">
+    
+            <div class="clear"></div>
+        </section>
+        <article>
+            <img id="custom" src="img/customer_phone.gif">
+        </article>
+    </main>
+</body>
+</html>
