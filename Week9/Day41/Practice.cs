@@ -254,5 +254,231 @@
 </body>
 </html>
 -----------------------------------------------------------------
+//별(*) 을 사용하여 전체 Style을 부여
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0; padding: 0;
+        }
+        h3{
+            margin: 20px 0 0 10px;
+        }
+        ul{
+            margin: 10px 0 0 30px;
+        }
+        li{
+            margin-top: 2px;
+        }
+        #banner{
+            width: 185px; height: 236px;
+            background-image: url("./img/banner_bg.jpg");
+            border: solid 1px #ccc;
+        }
+        #banner img{
+            margin:202px 0 0 50px;
+        }
+    </style>
+</head>
+<body>
+    <h3>PHP 책 소개</h3>
+    <ul>
+        <li>저자 : 황재호</li>
+        <li>출판사 : 한빛미디어</li>
+        <li>가격 : 30,000원</li>
+    </ul>
+    <div id="banner">
+        <img src="./img/buy.png">
+    </div>
+</body>
+</html>
+-----------------------------------------------------------------
+//인라인과 블록을 직접 사용
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 스타일을 자바에 넣고 싶다면 script로 -->
+    <style>
+
+    </style>
+</head>
+<body>
+    <h2>인라인 블록</h2>
+
+    <h3>1. 인라인 요소</h3>
+        <span>텍스트1</span>
+        <span>텍스트2</span>
+        <span>텍스트3</span>
+        <img src="./img/image1.jpg">
+        <img src="./img/image2.jpg">
+    <h3>2. 블록 요소</h3>
+    <p>이것은 단락입니다.</p>
+    <div>박스 1</div>
+</body>
+</html>
+-----------------------------------------------------------------
+//Display 속성 사용     [ display; 과 inline;을 사용하면 블록 요소가 인라인으로 바뀜 ]
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+        #menu{
+            width: 500px; padding: 10;
+            margin: 20px 0 0 40px;
+            background-color: #eee;
+            border: solid 2px #aaa;
+            text-align: center;
+        }
+        #menu li{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li>회사소개 |</li>
+        <li>제품소개 |</li>
+        <li>공지사항 |</li>
+        <li>업무제휴 |</li>
+        <li>고객센터 |</li>
+    </ul>
+</body>
+</html>
+-----------------------------------------------------------------
+//인라인 + 블록 특성 [ display:inline-block 을 통해서 인라인과 박스 방식을 모두 사용해 공간에 맞게 옆, 아래로 배치 가능 ]
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+        .green_box{
+            display:inline-block;
+            width: 150px; height: 75px; 
+            margin: 10px; padding: 10px;
+            border: solid 3px #73AD21;
+        }
+    </style>
+</head>
+<body>
+    <h2>인라인 + 블록 특성 (display:inline-block)</h2>
+    <div class="green_box">박스 1</div>
+    <div class="green_box">박스 2</div>
+    <div class="green_box">박스 3</div>
+    <div class="green_box">박스 4</div>
+    <div class="green_box">박스 5</div>
+    <div class="green_box">박스 6</div>
+</body>
+</html>
+-----------------------------------------------------------------
+//CSS 테이블과 폼 [ 테이블의 경계선, 배경, 텍스트를 넣는 방법 ]
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+        table{
+            border-collapse: collapse; width: 610px
+        }
+        tr{
+            height: 40px; text-align: center;
+        }
+        td, th{
+            padding: 5px;
+        }
+        .train{
+            background-color: #fbdbf2;
+            color: #f1477b;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .table_title{
+            height: 30px;
+            background-color: #eeeeee;
+        }
+        #col1, #col4{
+            width: 90px;
+        }
+        #col2, #col3{
+            width: 60px;
+        }
+        #col5, #col6{
+            width: 80px;
+        }
+        table, td, th{
+            border:solid 1px #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <h2>KTX 열차표 예매</h2>
+    <table>
+        <tr class="table_title">
+            <th>열차번호</th>
+            <th>출발</th>
+            <th>도착</th>
+            <th>출발시간</th>
+            <th>특실</th>
+            <th>일반실</th>
+            <th>소요시간</th>
+        </tr>
+        <tr>
+            <td id="col1" class="train">175</td>
+            <td id="col2">서울</td>
+            <td id="col3">부산</td>
+            <td id="col4">21:00</td>
+            <td id="col5"><img src="./img/full.png"></td>
+            <td id="col6"><img src="./img/full.png"></td>
+            <td id="col7">02:44</td>
+        </tr>
+        <tr>
+            <td id="col1" class="train">177</td>
+            <td id="col2">서울</td>
+            <td id="col3">부산</td>
+            <td id="col4">21:30</td>
+            <td id="col5"><img src="./img/empty.png"></td>
+            <td id="col6"><img src="./img/empty.png"></td>
+            <td id="col7">02:38</td>
+        </tr>
+        <tr>
+            <td class="train">179</td>
+            <td>서울</td>
+            <td>부산</td>
+            <td>22:00</td>
+            <td><img src="./img/empty.png"></td>
+            <td><img src="./img/empty.png"></td>
+            <td>02:42</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+
+
+-----------------------------------------------------------------
 //
 
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
+
+-----------------------------------------------------------------
+//
