@@ -1,63 +1,151 @@
 //
+namespace MVCEmptyApp01
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            // MVC로 넘어가는 중간단계 처리
+            builder.Services.AddControllersWithViews();
+            var app = builder.Build();
+
+            //app.MapGet("/", () => "Hello World!");
+            //app.MapGet("/greet", () => "<h1>안녕하세요!</h1>");
+            //app.MapGet("/help", () => "도와주세요~");
+
+            // 매핑
+            app.MapControllerRoute(
+                    name:"default",
+                    pattern:"{controller=Home}/{action=Index}/{id?}"
+                );
+            app.Run();
+        }
+    }
+}
+-----------------------------------------------------------------------------
+//라우팅
+[Route("api/products")]
+public class ProductsController : ControllerBase
+{
+    [HttpGet]
+    [Route("{id}")]
+    public IActionResult GetProductById(int id)
+    {
+        // /api/products/{id} 경로로 응답한다.
+        return Ok();
+    }
+
+    [HttpPost]
+    [Route("create")]
+    public IActionResult CreateProduct()
+    {
+        // /api/products/create 경로로 응답한다.
+        return Ok();
+    }
+}
+-----------------------------------------------------------------------------
+//라우팅 어노테이션으로 숫자 전달
+using Microsoft.AspNetCore.Mvc;
+
+namespace MyApp.Controllers
+{
+    public class HelpController : ControllerBase
+    {
+        // /Help 또는 /Help/{id} 경로로 요청을 처리한다.
+        [Route("/Help/{id?}")]
+        public int Help(int? id)
+        {
+            if (id.HasValue)
+            {
+                // id가 전달된 경우, 해당 ID를 반환한다.
+                return id.Value;
+            }
+            else
+            {
+                // id가 전달되지 않은 경우, 기본값으로 0을 반환한다.
+                return 0;
+            }
+        }
+    }
+}  
+-----------------------------------------------------------------------------
+ //HomeController밖에서 Route적용하고 적용할 Route 설정
+using Microsoft.AspNetCore.Mvc;
+
+namespace _20240827_MVCEmptyApp02.Controllers
+{
+		[Route("[Controller]")]
+    public class HomeController : Controller
+    {
+		    [Route("~/")]
+				[Route("/Home")]
+				[Route("[action]")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [Route("[action]")]
+        public IActionResult About()
+        {
+            return View();
+        }
+        public int Help(int? id)
+        {
+		        return id?? 100;
+        }
+    }
+}
 -----------------------------------------------------------------------------
 //
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
+namespace MVCEmptyApp02
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            var app = builder.Build();
 
+            app.UseRouting();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/Home", async (context) =>
+                {
+                    context.Response.ContentType = "text/plain; charset=utf-8"; //한글문제 해법
+                    await context.Response.WriteAsync("홈페이지 입니다. - Get");
+                });
+                endpoints.MapPost("/Home", async (context) =>
+                {
+                    await context.Response.WriteAsync("홈페이지 입니다. - Post");
+                });
+                endpoints.MapDelete("/Home", async (context) =>
+                {
+                    await context.Response.WriteAsync("홈페이지 입니다. - Delete");
+                });
+                endpoints.MapPut("/Home", async (context) =>
+                {
+                    await context.Response.WriteAsync("홈페이지 입니다. - Put");
+                });
 
+            });
 
+            //app.MapGet("/Home", () => "Hello World! --- GET");
+            //app.MapPost("/Home", () => "Hello World! --- POST");
+            //app.MapPut("/Home", () => "Hello World! --- PUT");
+            //app.MapDelete("/Home", () => "Hello World! --- DELETE");
 
+            app.Run(async (HttpContext context) =>
+            {
+                context.Response.ContentType = "text/plain; charset=utf-8";
+                await context.Response.WriteAsync("페이지를 찾을 수 없습니다.");
+            });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            app.Run();
+        }
+    }
+}
 -----------------------------------------------------------------------------
 //로그인화면 웹앱
 <!DOCTYPE html>
@@ -293,8 +381,4 @@
 </body>
 </html>
 
------------------------------------------------------------------------------
-//
------------------------------------------------------------------------------
-//
 
