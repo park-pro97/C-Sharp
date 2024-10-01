@@ -15,7 +15,7 @@ namespace Button2
 
         private void button1_Click(object sender, EventArgs e)
         {    
-            string host = "192.168.0.27";  // 라즈베리 파이 IP
+            string host = "192.168.0.33";  // 라즈베리 파이 IP
             string username = "admin";     // 사용자 이름
             string password = "1234";      // 비밀번호
 
@@ -55,11 +55,11 @@ namespace Button2
 
 const char* ssid = "pcroom";
 const char* password = "12345678";
-const char* userId = "mqtt_boy";
+const char* userId = "admin";
 const char* userPw = "1234";
 const char* clientId = userId;
 const char* topic = "MyOffice/Indoor/LEDControl";  // 특정 토픽으로 변경
-const char* serverIPAddress = "192.168.0.27";
+const char* serverIPAddress = "192.168.0.33";
 int messageBuf;  // 메시지 버퍼를 int로 정의
 
 // MQTT 메시지 콜백 함수
