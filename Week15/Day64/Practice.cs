@@ -31,7 +31,7 @@ namespace Button2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string host = "192.168.0.27";  // 라즈베리 파이 IP
+            string host = "192.168.0.33";  // 라즈베리 파이 IP
             string username = "admin";     // 사용자 이름
             string password = "1234";      // 비밀번호
 
