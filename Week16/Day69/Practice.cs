@@ -1,4 +1,4 @@
-//아두이노
+//아두이노 최종
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <Wire.h>
