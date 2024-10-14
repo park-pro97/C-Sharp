@@ -1,3 +1,8 @@
+// C#을 사용할 때 누겟 설치 해야함.
+Install-Package OpenCvSharp4 -Version 4.10.0.20240616
+Install-Package OpenCvSharp4.runtime.win
+
+
 //OpenCVTestCode.cs
 using OpenCvSharp;
 using System;
