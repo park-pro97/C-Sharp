@@ -1,7 +1,7 @@
 //Cv2.NamedWindow 함수로 창의 크기를 이미지에 맞게 자동으로 바꿔줌
 using OpenCvSharp;
 
-namespace _2021016_OpenCVWindow
+namespace OpenCVWindow
 {
     internal class Program
     {
@@ -51,7 +51,7 @@ namespace CV_Window_Resize
 using OpenCvSharp;
 using System.Diagnostics.CodeAnalysis;
 
-namespace _20241016_KeyMouse01
+namespace KeyMouse01
 {
     internal class Program
     {
@@ -95,7 +95,7 @@ namespace _20241016_KeyMouse01
 //트랙바 이벤트 제어
 using OpenCvSharp;
 
-namespace _20241016_TrackBar01
+namespace TrackBar01
 {
     internal class Program
     {
@@ -128,7 +128,7 @@ namespace _20241016_TrackBar01
 //마우스 이벤트 제어
 using OpenCvSharp;
 
-namespace _20241016_KeyMouse02
+namespace KeyMouse02
 {
     internal class Program
     {
@@ -205,7 +205,7 @@ namespace DrawCircle
 //그리기 함수 [ 타원 ]
 using OpenCvSharp;
 
-namespace _20241016_DrawingEclipse
+namespace DrawingEclipse
 {
     internal class Program
     {
@@ -299,7 +299,7 @@ namespace CVBasicCamera
 //카메라 제어 [ 흑백처리 + 조금 더 부드러운 프레임으로 ]
 using OpenCvSharp;
 
-namespace _20241016_CVBasicCamera01
+namespace CVBasicCamera01
 {
     internal class Program
     {
