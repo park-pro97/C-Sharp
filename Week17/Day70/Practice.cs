@@ -66,7 +66,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20241014_OpenCVSharp003
+namespace OpenCVSharp003
 {
     internal class Program
     {
@@ -88,7 +88,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20241014_OpenCVSharp004
+namespace OpenCVSharp004
 {
     internal class Program
     {
@@ -146,7 +146,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20241014_Size01
+namespace Size01
 {
     internal class Program
     {
@@ -190,7 +190,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20241014_RotatedRect01
+namespace RotatedRect01
 {
     internal class Program
     {
