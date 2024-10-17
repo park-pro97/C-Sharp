@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20241015_CvtColor01
+namespace CvtColor01
 {
     internal class Program
     {
@@ -42,7 +42,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _20241015_RectShow01
+namespace RectShow01
 {
     internal class Program
     {
@@ -129,7 +129,7 @@ namespace VecShow
 //Core 환경 Matrix 생성
 using OpenCvSharp;
 
-namespace _20241015_dotnet6
+namespace dotnet6
 {
     internal class Program
     {
@@ -163,7 +163,7 @@ namespace _20241015_dotnet6
 //32F의 Depth = 5, 원소의 크기 별로 다 맞게 나오는 것을 확인
 using OpenCvSharp;
 
-namespace _20241015_MatAttr
+namespace MatAttr
 {
     internal class Program
     {
@@ -266,7 +266,7 @@ namespace OpenCvSharpSample
 //그리기 함수 사용
 using OpenCvSharp;
 
-namespace _20241015_OpenCVDrawing
+namespace OpenCVDrawing
 {
     internal class Program
     {
@@ -307,7 +307,7 @@ namespace _20241015_OpenCVDrawing
 using OpenCvSharp;
 using System.ComponentModel;
 
-namespace _20241015_DrawingQuiz01
+namespace DrawingQuiz01
 {
     internal class Program
     {
@@ -339,11 +339,3 @@ namespace _20241015_DrawingQuiz01
         }
     }
 }
---------------------------------------------------------------------------------------
-//
-
---------------------------------------------------------------------------------------
-//
-
---------------------------------------------------------------------------------------
-//
