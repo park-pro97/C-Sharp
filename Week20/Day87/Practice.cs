@@ -203,3 +203,37 @@ namespace arduino_plc
         }
     }
 }
+-----------------------------------------------------------
+//아두이노 DHT-11 온습도 센서 윈폼과 Serial 통신
+#include <DHT.h>
+
+#define DHTPIN 2      // DHT-11 센서가 연결된 핀 번호
+#define DHTTYPE DHT11 // DHT-11 센서 유형을 지정
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  Serial.println("DHT-11 센서 데이터 출력 시작");
+}
+
+void loop() {
+  delay(1000); // 1초 간격으로 데이터 업데이트
+
+  float humidity = dht.readHumidity();    // 습도 측정
+  float temperature = dht.readTemperature(); // 섭씨 온도 측정
+
+  // 측정 실패 시 오류 메시지 출력
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("DHT-11 센서에서 데이터를 읽을 수 없습니다.");
+    return;
+  }
+
+  Serial.print("온도: ");
+  Serial.print(temperature);
+  Serial.print("°C ");
+  Serial.print("습도: ");
+  Serial.print(humidity);
+  Serial.println("%");
+}
