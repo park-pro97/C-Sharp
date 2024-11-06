@@ -204,6 +204,107 @@ namespace arduino_plc
     }
 }
 -----------------------------------------------------------
+//스레드 방식으로 읽어오고 텍스트 박스에 출력을 1초 타이머로
+using System;
+using System.IO.Ports;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+
+namespace arduino_plc
+{
+    public partial class Form1 : Form
+    {
+        private SerialPort arduino; // 아두이노와 시리얼 통신을 위한 SerialPort 객체
+        private Thread? receiveThread; // 데이터를 수신할 때 사용할 스레드
+        private bool receiveFlag = false; // 데이터를 계속 읽을지 여부를 결정하는 플래그
+        private System.Windows.Forms.Timer updateTimer; // WinForms 타이머 객체
+        private string latestData = ""; // 최신 데이터 저장용 변수
+
+        public Form1()
+        {
+            InitializeComponent(); // 폼의 구성 요소 초기화 (버튼, 텍스트박스 등 UI 설정)
+            arduino = new SerialPort("COM6", 9600); // 아두이노와 연결된 포트를 지정하고, 통신 속도를 9600으로 설정
+            arduino.Encoding = Encoding.UTF8; // 아두이노에서 보내는 데이터를 UTF-8로 읽음
+
+            // 타이머 초기화
+            updateTimer = new System.Windows.Forms.Timer();
+            updateTimer.Interval = 1000; // 1초(1000ms)마다 실행되도록 설정
+            updateTimer.Tick += UpdateTimer_Tick; // 타이머의 Tick 이벤트에 메서드 연결
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 시작 버튼을 눌렀을 때 실행
+
+            textBox1.AppendText($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] start" + Environment.NewLine);
+
+            if (!arduino.IsOpen) // 아두이노와의 포트가 아직 열려있지 않다면
+            {
+                arduino.Open(); // 포트를 열어 아두이노와 연결 시작
+            }
+
+            receiveFlag = true; // 데이터를 읽어오도록 플래그를 true로 설정
+
+            // 데이터를 수신하는 스레드를 시작
+            receiveThread = new Thread(ReceivingData); // ReceivingData 메서드를 실행하는 스레드 생성
+            receiveThread.Start(); // 스레드 실행 시작
+
+            // 타이머 시작 (UI에 1초마다 데이터를 출력)
+            updateTimer.Start();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // 중지 버튼을 눌렀을 때 실행
+
+            receiveFlag = false; // 데이터 수신을 멈추기 위해 플래그를 false로 설정
+
+            if (receiveThread != null && receiveThread.IsAlive) // 수신 스레드가 존재하고 실행 중이라면
+            {
+                receiveThread.Join(); // 스레드를 안전하게 종료할 때까지 대기
+            }
+
+            if (arduino.IsOpen) // 아두이노 포트가 열려있다면
+            {
+                arduino.Close(); // 아두이노 포트를 닫아서 연결 종료
+            }
+
+            textBox1.AppendText($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] stop" + Environment.NewLine);
+            updateTimer.Stop(); // 타이머 중지
+        }
+
+        private void ReceivingData()
+        {
+            // 데이터를 지속적으로 수신하는 메서드 (스레드에서 실행)
+
+            while (receiveFlag && arduino.IsOpen) // receiveFlag가 true이고 포트가 열려있는 동안 반복
+            {
+                try
+                {
+                    // 아두이노에서 한 줄의 데이터를 읽어서 latestData 변수에 저장
+                    latestData = arduino.ReadLine().Trim(); // 데이터를 읽고 양끝 공백을 제거
+                    Thread.Sleep(100); // 0.1초마다 데이터를 수신하여 최신 데이터 유지
+                }
+                catch (Exception ex) // 데이터 수신 중에 예외가 발생하면
+                {
+                    latestData = $"오류: {ex.Message}";
+                }
+            }
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            // 타이머를 통해 1초마다 텍스트박스에 최신 데이터를 출력
+            if (!string.IsNullOrEmpty(latestData)) // latestData에 값이 있을 경우에만 출력
+            {
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                textBox1.AppendText($"[{timestamp}] {latestData}" + Environment.NewLine);
+            }
+        }
+    }
+}
+-----------------------------------------------------------
 //아두이노 DHT-11 온습도 센서 윈폼과 Serial 통신
 #include <DHT.h>
 
