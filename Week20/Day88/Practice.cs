@@ -17,7 +17,7 @@ namespace ConsoleSocketServer
         static void Main(string[] args)
         {
             // 인터넷 주소 설정
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            IPAddress localAddr = IPAddress.Parse("192.168.0.60");
             // 포트 설정
             int port = 13000;
 
@@ -66,7 +66,7 @@ namespace ConsoleSocketClient
         static void Main(string[] args)
         {
             // 서버의 인터넷 주소 및 포트 설정
-            IPAddress serverAddr = IPAddress.Parse("127.0.0.1");
+            IPAddress serverAddr = IPAddress.Parse("192.168.0.60");
             int port = 13000;
 
             // 클라이언트 소켓 생성
@@ -142,6 +142,38 @@ namespace HW1107_2
                         // 데이터 수신 및 전송을 위한 네트워크 스트림 설정
                         NetworkStream stream = client.GetStream();
 
+                        Thread receiveThread = new Thread(() =>
+                        {
+                            try
+                            {
+                                while (client.Connected)
+                                {
+                                    if (stream.DataAvailable)
+                                    {
+                                        byte[] buffer = new byte[1024];
+                                        int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                                        string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                                        this.Invoke(new Action(() =>
+                                        {
+                                            textBox1.AppendText($"[INFO] 받은 메시지: {receivedData}\r\n");
+                                        }));
+                                    }
+                                    Thread.Sleep(500);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                this.Invoke(new Action(() =>
+                                {
+                                    textBox1.AppendText($"[ERROR] 데이터 수신 중 오류 발생: {ex.Message}\r\n");
+                                }));
+                            }
+                        });
+
+                        receiveThread.IsBackground = true;
+                        receiveThread.Start();
+
                         Thread sendThread = new Thread(() =>
                         {
                             try
@@ -189,6 +221,7 @@ namespace HW1107_2
         }
     }
 }
+
 ---------------------------------------------------------------
 //MES의 클라이언트
 using System;
