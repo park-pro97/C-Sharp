@@ -338,3 +338,138 @@ void loop() {
   Serial.print(humidity);
   Serial.println("%");
 }
+-----------------------------------------------------------
+최종 아두이노
+#include <DHT.h>
+
+#define DHTPIN 2      // DHT-11 센서가 연결된 핀 번호
+#define DHTTYPE DHT11 // DHT-11 센서 유형을 지정
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  Serial.println("DHT-11 센서 데이터 출력 시작");
+}
+
+void loop() {
+  delay(1000); // 1초 간격으로 데이터 업데이트
+
+  float humidity = dht.readHumidity();    // 습도 측정
+  float temperature = dht.readTemperature(); // 섭씨 온도 측정
+
+  // 측정 실패 시 오류 메시지 출력
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("DHT-11 센서에서 데이터를 읽을 수 없습니다.");
+    return;
+  }
+
+  Serial.print(temperature);
+  Serial.print(",");
+  Serial.println(humidity);
+}
+-----------------------------------------------------------
+//최종 C#
+using System;
+using System.IO.Ports;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+
+namespace arduino_plc2
+{
+    public partial class Form1 : Form
+    {
+        private SerialPort arduino; // 아두이노와 시리얼 통신을 위한 SerialPort 객체
+        private Thread? receiveThread; // 데이터를 수신할 때 사용할 스레드
+        private bool receiveFlag = false; // 데이터를 계속 읽을지 여부를 결정하는 플래그
+        private System.Windows.Forms.Timer updateTimer; // WinForms 타이머 객체
+        private string latestData = ""; // 최신 데이터 저장용 변수
+
+        public Form1()
+        {
+            InitializeComponent(); // 폼의 구성 요소 초기화
+            arduino = new SerialPort("COM6", 9600); // 아두이노와 연결된 포트를 지정하고, 통신 속도를 9600으로 설정
+            arduino.Encoding = Encoding.UTF8; // 아두이노에서 보내는 데이터를 UTF-8로 읽음
+
+            // 타이머 초기화
+            updateTimer = new System.Windows.Forms.Timer();
+            updateTimer.Interval = 1000; // 1초마다 실행되도록 설정
+            updateTimer.Tick += UpdateTimer_Tick; // 타이머의 Tick 이벤트에 메서드 연결
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            textBox1.AppendText($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] start" + Environment.NewLine);
+            textBox2.AppendText($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] start" + Environment.NewLine);
+
+            if (!arduino.IsOpen) // 아두이노와의 포트가 아직 열려있지 않다면
+            {
+                arduino.Open(); // 포트를 열어 아두이노와 연결 시작
+            }
+
+            receiveFlag = true; // 데이터를 읽어오도록 플래그를 true로 설정
+
+            receiveThread = new Thread(ReceivingData);
+            receiveThread.Start();
+
+            updateTimer.Start(); // 타이머 시작
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            receiveFlag = false; // 데이터 수신을 멈추기 위해 플래그를 false로 설정
+
+            if (receiveThread != null && receiveThread.IsAlive)
+            {
+                receiveThread.Join();
+            }
+
+            if (arduino.IsOpen)
+            {
+                arduino.Close();
+            }
+
+            textBox1.AppendText($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] stop" + Environment.NewLine);
+            textBox2.AppendText($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] stop" + Environment.NewLine);
+            updateTimer.Stop(); // 타이머 중지
+        }
+
+        private void ReceivingData()
+        {
+            while (receiveFlag && arduino.IsOpen)
+            {
+                try
+                {
+                    latestData = arduino.ReadLine().Trim(); // 데이터를 읽고 양끝 공백을 제거
+                    Thread.Sleep(100); // 데이터 수신 주기
+                }
+                catch (Exception ex)
+                {
+                    latestData = $"오류: {ex.Message}";
+                }
+            }
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(latestData))
+            {
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                string[] dataParts = latestData.Split(',');
+                if (dataParts.Length == 2)
+                {
+                    textBox1.AppendText($"[{timestamp}] 온도: {dataParts[0]}°C" + Environment.NewLine);
+                    textBox2.AppendText($"[{timestamp}] 습도: {dataParts[1]}%" + Environment.NewLine);
+                }
+                else
+                {
+                    textBox1.AppendText($"[{timestamp}] 데이터 오류: 형식이 올바르지 않습니다." + Environment.NewLine);
+                    textBox2.AppendText($"[{timestamp}] 데이터 오류: 형식이 올바르지 않습니다." + Environment.NewLine);
+                }
+            }
+        }
+    }
+}
