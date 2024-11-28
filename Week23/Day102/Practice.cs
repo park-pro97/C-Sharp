@@ -1,4 +1,4 @@
-//임시
+//Accept, Cancel 명령 추가했는데 테스트 해봐야함
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -605,7 +605,6 @@ namespace HW1107
             int reportID = new int(); // 수신된 ReportID
             string lastModelID = string.Empty; // 이전에 처리된 ModelID 저장
             string lastMaterialType = string.Empty; // MaterialID의 마지막 문자 저장 (A 또는 B)
-            bool isSampleMode = false; // Sample 모드 활성화 여부
 
             while (bMainThreadChk)
             {
@@ -622,75 +621,58 @@ namespace HW1107
                             {
                                 IDReport idReport = Report.IDReport.Dequeue(); // 큐에서 IDReport 가져오기
 
-                                // Sample Model 처리
-                                if (idReport.ModelID == "Sample Model")
+                                // 모델 체인지 처리 (ACCEPT / CANCEL)
+                                string currentModelIDLastChar = idReport.ModelID.Length > 0 ? idReport.ModelID[^1].ToString() : string.Empty;
+
+                                if (currentModelIDLastChar == "A" || currentModelIDLastChar == "B")
                                 {
-                                    updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Sample Model 수신: 테스트 모드 활성화\r\n");
-                                    isSampleMode = true; // Sample 모드 활성화
-                                    lastModelID = string.Empty; // 이전 ModelID 초기화
-                                    lastMaterialType = string.Empty; // Material 타입 초기화
+                                    // ModelID 마지막 문자가 A 또는 B이면 ACCEPT
+                                    updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 모델 변경 일치, ACCEPT 전송\r\n");
 
-                                    idReport.code = "7";
-                                    idReport.text = "불일치";
-
-                                    // CANCEL 패킷 생성 및 전송
-                                    var cancelMessage = CreatePacket("_CANCEL", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
-                                    SendPacket(cancelMessage);
-
-                                    updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] CANCEL 신호 전송 성공: {cancelMessage}\r\n");
+                                    var acceptMessage = CreatePacket("MODEL_CHANGE_ACCEPT", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
+                                    SendPacket(acceptMessage);
+                                    updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ACCEPT 신호 전송 성공: {acceptMessage}\r\n");
                                 }
                                 else
                                 {
-                                    // Sample 모드에서 Wafer A/B 처리
-                                    if (isSampleMode)
+                                    // A, B가 아닌 경우 CANCEL
+                                    updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 잘못된 ModelID, CANCEL 전송\r\n");
+
+                                    var cancelMessage = CreatePacket("MODEL_CHANGE_CANCEL", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
+                                    SendPacket(cancelMessage);
+                                    updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] CANCEL 신호 전송 성공: {cancelMessage}\r\n");
+                                }
+
+                                // ACCEPT 후 START/STOP 처리
+                                if (currentModelIDLastChar == "A" || currentModelIDLastChar == "B")
+                                {
+                                    // 모델이 동일하고, Material 타입이 다르면 START 전송
+                                    if (idReport.ModelID == lastModelID && currentModelIDLastChar != lastMaterialType)
                                     {
-                                        // MaterialID의 마지막 문자 추출 (A 또는 B)
-                                        string currentMaterialType = idReport.MaterialID[^1].ToString();
+                                        updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ModelID 동일, Material 타입 다름, START 전송\r\n");
 
-                                        if (string.IsNullOrEmpty(lastModelID) || string.IsNullOrEmpty(lastMaterialType))
-                                        {
-                                            // 첫 번째 ModelID 및 Material 타입 저장
-                                            lastModelID = idReport.ModelID;
-                                            lastMaterialType = currentMaterialType;
+                                        // START 패킷 생성 및 전송
+                                        var startMessage = CreatePacket("_START", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
+                                        SendPacket(startMessage);
 
-                                            // CANCEL 패킷 생성 및 전송
-                                            updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] 첫 번째 Model 및 Material 수신, CANCEL 전송\r\n");
-                                            var cancelMessage = CreatePacket("_CANCEL", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
-                                            SendPacket(cancelMessage);
-
-                                            updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] CANCEL 신호 전송 성공: {cancelMessage}\r\n");
-                                        }
-                                        else
-                                        {
-                                            // ModelID는 동일하고, MaterialID의 마지막 문자가 다를 경우 START
-                                            if (idReport.ModelID == lastModelID && currentMaterialType != lastMaterialType)
-                                            {
-                                                updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ModelID 동일, Material 타입 다름, START 전송\r\n");
-
-                                                // START 패킷 생성 및 전송
-                                                var startMessage = CreatePacket("_START", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
-                                                SendPacket(startMessage);
-
-                                                updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] START 신호 전송 성공: {startMessage}\r\n");
-                                            }
-                                            else
-                                            {
-                                                // ModelID가 다르거나 Material 타입이 동일할 경우 CANCEL
-                                                updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ModelID 불일치 또는 Material 타입 동일, CANCEL 전송\r\n");
-
-                                                // CANCEL 패킷 생성 및 전송
-                                                var cancelMessage = CreatePacket("_CANCEL", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
-                                                SendPacket(cancelMessage);
-
-                                                updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] CANCEL 신호 전송 성공: {cancelMessage}\r\n");
-                                            }
-                                        }
+                                        updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] START 신호 전송 성공: {startMessage}\r\n");
                                     }
                                     else
                                     {
-                                        updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Sample 모드가 아님, 데이터 무시\r\n");
+                                        // ModelID가 다르거나 Material 타입이 동일할 경우 CANCEL
+                                        updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ModelID 불일치 또는 Material 타입 동일, CANCEL 전송\r\n");
+
+                                        // CANCEL 패킷 생성 및 전송
+                                        var cancelMessage = CreatePacket("_CANCEL", idReport.ModelID, idReport.ProcID, idReport.MaterialID, idReport.code, idReport.text);
+                                        SendPacket(cancelMessage);
+
+                                        updateErrtext($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] CANCEL 신호 전송 성공: {cancelMessage}\r\n");
                                     }
                                 }
+
+                                // 마지막 처리된 ModelID와 MaterialID 저장
+                                lastModelID = idReport.ModelID;
+                                lastMaterialType = currentModelIDLastChar;
                             }
                             catch (Exception ex)
                             {
@@ -705,6 +687,9 @@ namespace HW1107
                 }
             }
         }
+
+
+
 
         // 패킷 문자열 생성 메서드
         private string CreatePacket(string commandType, string modelID, string procID, string materialID, string code, string text)
